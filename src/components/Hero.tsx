@@ -666,25 +666,6 @@ const Hero = () => {
                         </p>
                       </div>
                     )}
-
-                    {!showDetailedView && !showAlternativeAssets && (
-                      <div className="flex items-center justify-between mt-4">
-                        <Button
-                          size="sm"
-                          className="text-sm bg-white dark:bg-gray-700 text-quantaryx-purple dark:text-white border border-quantaryx-purple/50 dark:border-purple-500/50 hover:bg-quantaryx-purple/10 dark:hover:bg-purple-800/30 shadow-sm"
-                          onClick={toggleDetailedView}
-                        >
-                          查看詳細分析
-                        </Button>
-                        <Button
-                          size="sm"
-                          className="text-sm bg-white dark:bg-gray-700 text-quantaryx-purple dark:text-white border border-quantaryx-purple/50 dark:border-purple-500/50 hover:bg-quantaryx-purple/10 dark:hover:bg-purple-800/30 shadow-sm"
-                          onClick={toggleAlternativeAssets}
-                        >
-                          查看另類資產
-                        </Button>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
