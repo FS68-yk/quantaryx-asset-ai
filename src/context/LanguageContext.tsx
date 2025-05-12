@@ -210,7 +210,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Vision
     'vision.title': 'Our',
     'vision.title.colored': 'Vision',
-    'vision.subtitle': 'QuantaryX is more than financial software. We're building the operating system that enables individuals and institutions to understand, control, and grow wealth with AI.',
+    'vision.subtitle': 'QuantaryX is more than financial software. We\'re building the operating system that enables individuals and institutions to understand, control, and grow wealth with AI.',
     'vision.understand.title': 'Understand Assets',
     'vision.understand.desc': 'AI integrates scattered financial data into a complete asset view, revealing true cash flows and investment positions.',
     'vision.control.title': 'Control Wealth',
