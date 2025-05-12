@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Check } from 'lucide-react';
@@ -13,7 +12,7 @@ const InvestorSection = () => {
   ];
 
   return (
-    <div className="py-20 bg-gradient-to-br from-quantaryx-darkblue to-quantaryx-purple/90 text-white">
+    <div id="investors" className="py-20 bg-gradient-to-br from-quantaryx-darkblue to-quantaryx-purple/90 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
           <div className="mb-10 lg:mb-0">

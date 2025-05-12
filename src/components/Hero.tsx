@@ -123,6 +123,10 @@ const Hero = () => {
             </Pie>
             <Tooltip 
               formatter={(value) => [`${value}%`, '占比']}
+              contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', border: '1px solid #ccc' }}
+              labelStyle={{ color: '#333' }}
+              itemStyle={{ color: '#333' }}
+              className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
             />
           </PieChart>
         </ResponsiveContainer>
@@ -137,6 +141,10 @@ const Hero = () => {
             <Tooltip 
               formatter={(value) => [`$${Number(value).toLocaleString()}`, '表現']}
               cursor={{fill: 'rgba(155, 135, 245, 0.1)'}}
+              contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', border: '1px solid #ccc' }}
+              labelStyle={{ color: '#333' }}
+              itemStyle={{ color: '#333' }}
+              className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
             />
             <Line 
               type="monotone" 
@@ -150,11 +158,11 @@ const Hero = () => {
       );
     } else if (chartType === 'advanced') {
       return (
-        <div className="p-2 bg-quantaryx-softblue/20 rounded-lg h-full flex flex-col justify-center items-center">
+        <div className="p-2 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg h-full flex flex-col justify-center items-center">
           <Brain className="h-12 w-12 text-quantaryx-purple mb-2 animate-pulse" />
           <div className="text-center">
-            <p className="font-medium text-quantaryx-darkblue">AI 正在分析您的投資組合</p>
-            <p className="text-xs text-gray-600 mt-1">發現潛在機會與風險...</p>
+            <p className="font-medium text-quantaryx-darkblue dark:text-gray-200">AI 正在分析您的投資組合</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">發現潛在機會與風險...</p>
           </div>
         </div>
       );
@@ -168,6 +176,10 @@ const Hero = () => {
             <Tooltip 
               formatter={(value) => [`$${Number(value).toLocaleString()}`, '淨值']}
               cursor={{fill: 'rgba(155, 135, 245, 0.1)'}}
+              contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', border: '1px solid #ccc' }}
+              labelStyle={{ color: '#333' }}
+              itemStyle={{ color: '#333' }}
+              className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
             />
             <Bar 
               dataKey="value" 
@@ -187,24 +199,24 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-white">
+    <div className="relative overflow-hidden bg-white dark:bg-gray-900">
       <div className="bg-grid absolute inset-0 opacity-20"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left flex flex-col justify-center">
             <div className="opacity-0 animate-fade-in">
-              <div className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-quantaryx-softblue text-quantaryx-darkblue mb-6">
+              <div className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-quantaryx-softblue text-quantaryx-darkblue dark:bg-purple-900/30 dark:text-gray-200 mb-6">
                 <Brain className="h-4 w-4 mr-1.5" />
                 <span>新一代AI財富管理系統</span>
               </div>
             </div>
             
-            <h1 className="opacity-0 animate-fade-in animate-delay-200 text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
+            <h1 className="opacity-0 animate-fade-in animate-delay-200 text-4xl tracking-tight font-bold text-gray-900 dark:text-white sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
               <span className="block">用人工智能</span>
               <span className="block text-gradient">重新定義資產掌控</span>
             </h1>
             
-            <p className="opacity-0 animate-fade-in animate-delay-300 mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+            <p className="opacity-0 animate-fade-in animate-delay-300 mt-3 text-base text-gray-500 dark:text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
               QuantaryX 整合AI深度學習、知識圖譜與自然語言處理技術，為高資產個人與專業投資者提供全方位的資產可視化、智能決策與自動化執行平台。
             </p>
             
@@ -218,11 +230,11 @@ const Hero = () => {
                 <Button 
                   onClick={() => scrollToSection('products')}
                   variant="outline" 
-                  className="border-quantaryx-purple text-quantaryx-purple hover:bg-quantaryx-purple/10 px-8 py-6 text-lg">
+                  className="border-quantaryx-purple text-quantaryx-purple hover:bg-quantaryx-purple/10 dark:border-purple-500 dark:text-purple-400 dark:hover:bg-purple-900/30 px-8 py-6 text-lg">
                   了解更多
                 </Button>
               </div>
-              <p className="mt-3 text-sm text-gray-500">
+              <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
                 專為高資產個人與專業投資者設計
               </p>
             </div>
@@ -233,20 +245,20 @@ const Hero = () => {
                   key={index}
                   className={`p-3 rounded-lg text-left transition-all ${
                     activeFeature === index 
-                      ? "bg-quantaryx-purple/10 border border-quantaryx-purple/30" 
-                      : "hover:bg-gray-50 border border-transparent"
+                      ? "bg-quantaryx-purple/10 border border-quantaryx-purple/30 dark:bg-purple-700/30 dark:border-purple-500/50" 
+                      : "hover:bg-gray-50 dark:hover:bg-gray-800 border border-transparent"
                   }`}
                   onClick={() => handleFeatureClick(index)}
                 >
                   <div className="flex items-start">
                     <div className={`p-2 rounded-md ${
-                      activeFeature === index ? "bg-quantaryx-purple text-white" : "bg-gray-100"
+                      activeFeature === index ? "bg-quantaryx-purple text-white" : "bg-gray-100 dark:bg-gray-700"
                     }`}>
                       {feature.icon}
                     </div>
                     <div className="ml-3">
-                      <h3 className="text-sm font-medium">{feature.title}</h3>
-                      <p className="text-xs text-gray-500 mt-1">{feature.description}</p>
+                      <h3 className="text-sm font-medium dark:text-gray-200">{feature.title}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{feature.description}</p>
                     </div>
                   </div>
                 </button>
@@ -256,26 +268,30 @@ const Hero = () => {
           
           <div className="opacity-0 animate-fade-in animate-delay-700 mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
             <div className="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
-              <div className="relative block w-full bg-white rounded-lg overflow-hidden">
+              <div className="relative block w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
                 <div className="w-full h-auto bg-gradient-to-br from-quantaryx-purple/50 to-quantaryx-brightblue/30 rounded-lg p-6">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-xl animate-float p-6">
+                  <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-xl shadow-xl animate-float p-6">
                     <div className="flex justify-between items-center mb-4">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 bg-quantaryx-green rounded-full"></div>
-                        <span className="text-sm font-medium">資產總覽</span>
+                        <span className="text-sm font-medium dark:text-gray-200">資產總覽</span>
                       </div>
-                      <span className="text-2xl font-bold">$5.43M</span>
+                      <span className="text-2xl font-bold dark:text-white">$5.43M</span>
                     </div>
 
                     <div className="h-60 w-full">
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={mockData} barSize={20}>
                           <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
-                          <XAxis dataKey="month" fontSize={10} tickLine={false} axisLine={false} />
+                          <XAxis dataKey="month" fontSize={10} tickLine={false} axisLine={false} stroke="#888" />
                           <YAxis hide />
                           <Tooltip 
                             formatter={(value) => [`$${Number(value).toLocaleString()}`, '淨值']}
                             cursor={{fill: 'rgba(155, 135, 245, 0.1)'}}
+                            contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', border: '1px solid #ccc' }}
+                            labelStyle={{ color: '#333' }}
+                            itemStyle={{ color: '#333' }}
+                            className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
                           />
                           <Bar 
                             dataKey="value" 
@@ -293,12 +309,12 @@ const Hero = () => {
                     </div>
                     
                     {showAIInsight && (
-                      <div className="mt-3 p-3 bg-quantaryx-softblue/20 rounded-lg border border-quantaryx-softblue/30 animate-fade-in text-left">
+                      <div className="mt-3 p-3 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in text-left">
                         <div className="flex items-center mb-1">
                           <Brain className="h-4 w-4 text-quantaryx-purple mr-2" />
-                          <span className="text-sm font-medium text-quantaryx-darkblue">AI 智能洞察</span>
+                          <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">AI 智能洞察</span>
                         </div>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-xs text-gray-600 dark:text-gray-300">
                           {AIFeatures[activeFeature].title === "智慧資產分析" && "分析顯示您的資產在8月達到高峰，建議關注流動性分配以優化年底稅務籌劃。"}
                           {AIFeatures[activeFeature].title === "自動投資優化" && "根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。"}
                           {AIFeatures[activeFeature].title === "智能資料整合" && "系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。"}
@@ -315,13 +331,13 @@ const Hero = () => {
       </div>
       
       {/* Advanced AI Features Section - Updated with Carousel */}
-      <div className="bg-gray-50 py-12">
+      <div className="bg-gray-50 dark:bg-gray-900 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-gradient mb-4">
               QuantaryX 核心 AI 功能
             </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               滑動卡片探索我們如何運用人工智能重新定義財富管理體驗
             </p>
           </div>
@@ -339,28 +355,28 @@ const Hero = () => {
                 <CarouselItem key={feature.id} className="pl-1 md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
                     <Card 
-                      className={`bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer border h-full ${
+                      className={`bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer border h-full ${
                         selectedFeature?.id === feature.id 
-                          ? 'border-quantaryx-purple scale-[1.02]' 
-                          : 'border-gray-100'
+                          ? 'border-quantaryx-purple dark:border-purple-500 scale-[1.02]' 
+                          : 'border-gray-100 dark:border-gray-700'
                       }`}
                       onClick={() => setSelectedFeature(feature)}
                     >
                       <CardHeader>
                         <div className="flex items-center mb-2">
                           {feature.icon}
-                          <CardTitle className="ml-3 text-lg">{feature.title}</CardTitle>
+                          <CardTitle className="ml-3 text-lg dark:text-white">{feature.title}</CardTitle>
                         </div>
-                        <CardDescription>{feature.description}</CardDescription>
+                        <CardDescription className="dark:text-gray-300">{feature.description}</CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-gray-600 text-sm line-clamp-2">{feature.details}</p>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">{feature.details}</p>
                       </CardContent>
                       <CardFooter>
                         <Button 
                           variant="ghost" 
                           size="sm" 
-                          className="text-quantaryx-purple mt-2 px-0"
+                          className="text-quantaryx-purple dark:text-purple-400 mt-2 px-0"
                           onClick={() => setSelectedFeature(feature)}
                         >
                           了解更多 <ArrowRight className="ml-1 h-4 w-4" />
@@ -379,17 +395,17 @@ const Hero = () => {
           
           {/* Selected Feature Detail */}
           {selectedFeature && (
-            <div className="mt-10 bg-white rounded-xl shadow-md p-6 animate-fade-in">
+            <div className="mt-10 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 animate-fade-in">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
                   {selectedFeature.icon}
-                  <h3 className="ml-3 font-bold text-xl">{selectedFeature.title}</h3>
+                  <h3 className="ml-3 font-bold text-xl dark:text-white">{selectedFeature.title}</h3>
                 </div>
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={() => setSelectedFeature(null)}
-                  className="text-gray-500"
+                  className="text-gray-500 dark:text-gray-400"
                 >
                   關閉
                 </Button>
@@ -398,35 +414,35 @@ const Hero = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <div className="mb-6">
-                    <h4 className="font-medium mb-2">功能詳情</h4>
-                    <p className="text-gray-700">{selectedFeature.details}</p>
+                    <h4 className="font-medium mb-2 dark:text-gray-200">功能詳情</h4>
+                    <p className="text-gray-700 dark:text-gray-300">{selectedFeature.details}</p>
                   </div>
                   
                   <div className="mb-6">
-                    <h4 className="font-medium mb-2 flex items-center">
+                    <h4 className="font-medium mb-2 flex items-center dark:text-gray-200">
                       <span className="inline-block w-2 h-2 bg-quantaryx-purple rounded-full mr-2"></span>
                       獲取優勢
                     </h4>
-                    <p className="text-gray-700 text-sm border-l-2 border-quantaryx-purple/30 pl-3 py-1">
+                    <p className="text-gray-700 dark:text-gray-300 text-sm border-l-2 border-quantaryx-purple/30 dark:border-purple-500/50 pl-3 py-1">
                       {selectedFeature.uniqueFeature}
                     </p>
                   </div>
                   
-                  <h4 className="font-medium mb-3 flex items-center">
+                  <h4 className="font-medium mb-3 flex items-center dark:text-gray-200">
                     <Brain className="h-4 w-4 mr-2 text-quantaryx-purple" />
                     AI 驅動能力
                   </h4>
                   
-                  <ScrollArea className="h-[180px] border rounded p-2">
+                  <ScrollArea className="h-[180px] border dark:border-gray-700 rounded p-2">
                     <ul className="space-y-2">
                       {selectedFeature.capabilities.map((capability, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="h-5 w-5 rounded-full flex items-center justify-center mt-0.5 mr-2 bg-quantaryx-purple/10 text-quantaryx-purple">
+                          <span className="h-5 w-5 rounded-full flex items-center justify-center mt-0.5 mr-2 bg-quantaryx-purple/10 dark:bg-purple-700/30 text-quantaryx-purple dark:text-purple-400">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-3 w-3">
                               <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                           </span>
-                          <span className="text-sm">{capability}</span>
+                          <span className="text-sm dark:text-gray-300">{capability}</span>
                         </li>
                       ))}
                     </ul>
@@ -434,16 +450,16 @@ const Hero = () => {
                 </div>
                 
                 <div>
-                  <div className="h-64 bg-gray-50 rounded-lg p-4 mb-4">
+                  <div className="h-64 bg-gray-50 dark:bg-gray-900 rounded-lg p-4 mb-4">
                     {renderChart(selectedFeature.chartType)}
                   </div>
                   
-                  <div className="mt-3 p-4 bg-quantaryx-softblue/20 rounded-lg border border-quantaryx-softblue/30 animate-fade-in">
+                  <div className="mt-3 p-4 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in">
                     <div className="flex items-center mb-2">
                       <Brain className="h-4 w-4 text-quantaryx-purple mr-2" />
-                      <span className="text-sm font-medium text-quantaryx-darkblue">AI 智能洞察</span>
+                      <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">AI 智能洞察</span>
                     </div>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
                       {selectedFeature.aiInsight}
                     </p>
                   </div>

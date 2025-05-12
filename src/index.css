@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -116,4 +115,80 @@
 
 .dark .bg-grid {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+/* Add these dark mode specific styles */
+.dark .bg-white {
+  @apply bg-gray-800;
+}
+
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-700 {
+  @apply text-gray-300;
+}
+
+.dark .border-gray-100,
+.dark .border-gray-200,
+.dark .border-gray-300 {
+  @apply border-gray-700;
+}
+
+.dark .bg-gray-50 {
+  @apply bg-gray-900;
+}
+
+.dark .text-gray-900 {
+  @apply text-gray-100;
+}
+
+.dark .shadow-md,
+.dark .shadow-lg,
+.dark .shadow-sm {
+  @apply shadow-gray-900;
+}
+
+.dark .text-quantaryx-darkblue {
+  @apply text-gray-100;
+}
+
+.dark .hover\:bg-quantaryx-darkblue\/10:hover {
+  @apply hover:bg-white/10;
+}
+
+.dark .border-quantaryx-darkblue {
+  @apply border-gray-600;
+}
+
+.dark .bg-quantaryx-softblue\/20 {
+  @apply bg-purple-900/20;
+}
+
+.dark .border-quantaryx-softblue\/30 {
+  @apply border-purple-700/30;
+}
+
+.dark .text-quantaryx-darkblue {
+  @apply text-gray-200;
+}
+
+.dark .bg-quantaryx-softblue\/30 {
+  @apply bg-purple-900/30;
+}
+
+/* Fix feature icons in dark mode */
+.dark .bg-blue-500,
+.dark .bg-purple-500,
+.dark .bg-green-500,
+.dark .bg-orange-500 {
+  @apply bg-opacity-80;
+}
+
+/* Improve contrast for AI insights section */
+.dark .bg-quantaryx-purple\/10 {
+  @apply bg-purple-700/30;
+}
+
+.dark .border-quantaryx-purple\/30 {
+  @apply border-purple-500/50;
 }

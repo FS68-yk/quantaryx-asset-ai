@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from 'lucide-react';
@@ -45,14 +44,14 @@ const CTA = () => {
   };
 
   return (
-    <div id="contact" className="bg-gray-50 py-20">
+    <div id="contact" className="bg-gray-50 dark:bg-gray-900 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
           <div className="mb-10 lg:mb-0">
             <h2 className="text-3xl font-bold mb-6 text-left">
               準備好 <span className="text-gradient">重新定義</span> 你的資產管理方式了嗎？
             </h2>
-            <p className="text-xl mb-8 text-gray-500 text-left">
+            <p className="text-xl mb-8 text-gray-500 dark:text-gray-300 text-left">
               無論您是高資產個人、家族辦公室、還是專業投資機構，QuantaryX 都能為您提供前所未有的資產掌控體驗。
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -75,7 +74,7 @@ const CTA = () => {
                   });
                 }}
                 variant="outline" 
-                className="border-quantaryx-darkblue text-quantaryx-darkblue hover:bg-quantaryx-darkblue/10"
+                className="border-quantaryx-darkblue text-quantaryx-darkblue hover:bg-quantaryx-darkblue/10 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-white/10"
               >
                 了解定價
               </Button>
@@ -83,12 +82,12 @@ const CTA = () => {
           </div>
           
           <div className="lg:pl-10">
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h3 className="text-xl font-bold mb-6 text-left">聯繫我們</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+              <h3 className="text-xl font-bold mb-6 text-left dark:text-white">聯繫我們</h3>
               
               <form id="contact-form" className="space-y-4" onSubmit={handleSubmit}>
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 text-left mb-1">姓名</label>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 text-left mb-1">姓名</label>
                   <input
                     type="text"
                     id="name"
@@ -96,13 +95,13 @@ const CTA = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-quantaryx-purple focus:ring focus:ring-quantaryx-purple/20 transition-colors p-2 border"
+                    className="w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-quantaryx-purple focus:ring focus:ring-quantaryx-purple/20 transition-colors p-2 border dark:bg-gray-700 dark:text-white"
                     placeholder="您的姓名"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 text-left mb-1">電子郵件</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 text-left mb-1">電子郵件</label>
                   <input
                     type="email"
                     id="email"
@@ -110,19 +109,19 @@ const CTA = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-quantaryx-purple focus:ring focus:ring-quantaryx-purple/20 transition-colors p-2 border"
+                    className="w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-quantaryx-purple focus:ring focus:ring-quantaryx-purple/20 transition-colors p-2 border dark:bg-gray-700 dark:text-white"
                     placeholder="您的電子郵件"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="type" className="block text-sm font-medium text-gray-700 text-left mb-1">您是</label>
+                  <label htmlFor="type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 text-left mb-1">您是</label>
                   <select
                     id="type"
                     name="type"
                     value={formData.type}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-quantaryx-purple focus:ring focus:ring-quantaryx-purple/20 transition-colors p-2 border"
+                    className="w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-quantaryx-purple focus:ring focus:ring-quantaryx-purple/20 transition-colors p-2 border dark:bg-gray-700 dark:text-white"
                   >
                     <option>高淨值個人</option>
                     <option>家族辦公室</option>
@@ -133,7 +132,7 @@ const CTA = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 text-left mb-1">訊息</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 text-left mb-1">訊息</label>
                   <textarea
                     id="message"
                     name="message"
@@ -141,14 +140,14 @@ const CTA = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-quantaryx-purple focus:ring focus:ring-quantaryx-purple/20 transition-colors p-2 border"
+                    className="w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-quantaryx-purple focus:ring focus:ring-quantaryx-purple/20 transition-colors p-2 border dark:bg-gray-700 dark:text-white"
                     placeholder="請告訴我們您的需求"
                   ></textarea>
                 </div>
                 
                 <Button 
                   type="submit" 
-                  className="w-full bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90"
+                  className="w-full bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 dark:bg-quantaryx-purple dark:hover:bg-quantaryx-purple/90"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? '提交中...' : '提交'}

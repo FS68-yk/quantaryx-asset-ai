@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X } from 'lucide-react';
@@ -23,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed w-full bg-white/80 dark:bg-quantaryx-darkblue/90 backdrop-blur-md z-50 shadow-sm transition-colors duration-300">
+    <nav className="fixed w-full bg-white/80 dark:bg-gray-900/95 backdrop-blur-md z-50 shadow-sm transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
@@ -41,7 +40,7 @@ const Navbar = () => {
             <ThemeToggle />
             <Button 
               onClick={() => scrollToSection('contact')}
-              className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 dark:bg-quantaryx-purple dark:hover:bg-quantaryx-purple/90"
+              className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 dark:bg-quantaryx-purple dark:hover:bg-quantaryx-purple/90 text-white"
             >
               請求演示
             </Button>
@@ -59,7 +58,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-quantaryx-darkblue shadow-lg animate-fade-in transition-colors duration-300">
+        <div className="md:hidden bg-white dark:bg-gray-900 shadow-lg animate-fade-in transition-colors duration-300">
           <div className="px-4 pt-2 pb-4 space-y-1">
             <button onClick={() => scrollToSection('products')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">產品</button>
             <button onClick={() => scrollToSection('vision')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">願景</button>
@@ -68,7 +67,7 @@ const Navbar = () => {
             <div className="pt-2">
               <Button 
                 onClick={() => scrollToSection('contact')} 
-                className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 dark:bg-quantaryx-purple dark:hover:bg-quantaryx-purple/90 w-full"
+                className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 dark:bg-quantaryx-purple dark:hover:bg-quantaryx-purple/90 text-white w-full"
               >
                 請求演示
               </Button>
