@@ -90,28 +90,28 @@ const Hero = () => {
       title: t('hero.aiFeature.analysis'),
       description: t('hero.aiFeature.analysis.desc'),
       insight: "分析顯示您的資產分配過度集中在科技股(38%)，遠高於建議的20%上限。同時，您的緊急基金只有1.2個月支出，低於建議的6個月水平。AI建議立即優化這兩個區域以降低風險。",
-      insightEn: "Analysis shows your asset allocation is overly concentrated in technology stocks (38%), far exceeding the recommended 20% maximum. Additionally, your emergency fund only covers 1.2 months of expenses, well below the recommended 6-month level. AI recommends immediate optimization in these two areas to reduce risk."
+      insightEn: "Analysis shows your tech stock allocation (38%) far exceeds the 20% recommended maximum. Your emergency fund covers only 1.2 months versus the recommended 6 months. Urgent rebalancing needed."
     },
     {
       icon: <ChartBar className="h-5 w-5" />,
       title: t('hero.aiFeature.optimization'),
       description: t('hero.aiFeature.optimization.desc'),
       insight: "根據您的退休目標和當前市場條件，AI預測您目前的儲蓄率每月需額外增加¥15,000才能實現目標。系統已為您設計了三種方案來彌補這個差距，包括資產重新配置、開源和節流策略。",
-      insightEn: "Based on your retirement goals and current market conditions, AI predicts you need to increase your monthly savings by $2,100 to reach your target. The system has designed three plans to bridge this gap, including asset reallocation, income enhancement, and expense reduction strategies."
+      insightEn: "Your retirement plan needs +$2,100 monthly to reach targets. AI has designed three strategies: asset reallocation, income boosting, and expense optimization."
     },
     {
       icon: <Database className="h-5 w-5" />,
       title: t('hero.aiFeature.integration'),
       description: t('hero.aiFeature.integration.desc'),
       insight: "AI發現您的跨機構資產中有三張保單存在重複保障，每年多支出¥28,500。此外，您的兩個閒置銀行賬戶每年產生¥3,600的不必要管理費。系統建議合併這些賬戶並優化保險組合。",
-      insightEn: "AI has identified three insurance policies with duplicate coverage across your institutional assets, resulting in an unnecessary annual expense of $4,000. Additionally, two idle bank accounts are generating $500 in unnecessary annual management fees. The system recommends consolidating these accounts and optimizing your insurance portfolio."
+      insightEn: "Three duplicate insurance policies found costing $4,000/year. Two idle accounts generating $500 in unnecessary fees. Consolidation recommended."
     },
     {
       icon: <Search className="h-5 w-5" />,
       title: t('hero.aiFeature.opportunity'),
       description: t('hero.aiFeature.opportunity.desc'),
       insight: "基於您的投資偏好與風險承受度，AI已識別出三個特定領域的高潛力投資機會：1)低波動高收益債券基金 2)非美元計價的新興市場ETF 3)具有穩定股息增長的公用事業股。詳情請查看完整分析。",
-      insightEn: "Based on your investment preferences and risk tolerance, AI has identified high-potential investment opportunities in three specific areas: 1) Low-volatility high-yield bond funds 2) Non-USD denominated emerging market ETFs 3) Utility stocks with stable dividend growth. See the full analysis for details."
+      insightEn: "Based on your profile, AI found 3 high-potential opportunities: low-volatility bond funds, non-USD emerging market ETFs, and utility stocks with stable dividend growth."
     }
   ];
 
@@ -186,8 +186,8 @@ const Hero = () => {
         <div className="p-2 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg h-full flex flex-col justify-center items-center">
           <Brain className="h-12 w-12 text-quantaryx-purple mb-2 animate-pulse" />
           <div className="text-center">
-            <p className="font-medium text-quantaryx-darkblue dark:text-gray-200">{language === 'en' ? 'AI is analyzing your portfolio' : 'AI 正在分析您的投資組合'}</p>
-            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{language === 'en' ? 'Discovering potential opportunities and risks...' : '發現潛在機會與風險...'}</p>
+            <p className="font-medium text-quantaryx-darkblue dark:text-gray-200">{language === 'en' ? 'AI analyzing your portfolio' : 'AI 正在分析您的投資組合'}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{language === 'en' ? 'Finding opportunities and risks...' : '發現潛在機會與風險...'}</p>
           </div>
         </div>
       );
