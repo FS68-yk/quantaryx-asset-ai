@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -30,24 +33,26 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <button onClick={() => scrollToSection('products')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">產品</button>
-            <button onClick={() => scrollToSection('vision')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">願景</button>
-            <button onClick={() => scrollToSection('investors')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">投資者</button>
-            <button onClick={() => scrollToSection('contact')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">聯繫我們</button>
+            <button onClick={() => scrollToSection('products')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">{t('nav.products')}</button>
+            <button onClick={() => scrollToSection('vision')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">{t('nav.vision')}</button>
+            <button onClick={() => scrollToSection('investors')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">{t('nav.investors')}</button>
+            <button onClick={() => scrollToSection('contact')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">{t('nav.contact')}</button>
           </div>
           
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher />
             <ThemeToggle />
             <Button 
               onClick={() => scrollToSection('contact')}
               className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 dark:bg-quantaryx-purple dark:hover:bg-quantaryx-purple/90 text-white"
             >
-              請求演示
+              {t('nav.requestDemo')}
             </Button>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-4">
+            <LanguageSwitcher />
             <ThemeToggle />
             <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label={isMenuOpen ? "關閉選單" : "開啟選單"}>
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -60,16 +65,16 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white dark:bg-gray-900 shadow-lg animate-fade-in transition-colors duration-300">
           <div className="px-4 pt-2 pb-4 space-y-1">
-            <button onClick={() => scrollToSection('products')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">產品</button>
-            <button onClick={() => scrollToSection('vision')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">願景</button>
-            <button onClick={() => scrollToSection('investors')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">投資者</button>
-            <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">聯繫我們</button>
+            <button onClick={() => scrollToSection('products')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">{t('nav.products')}</button>
+            <button onClick={() => scrollToSection('vision')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">{t('nav.vision')}</button>
+            <button onClick={() => scrollToSection('investors')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">{t('nav.investors')}</button>
+            <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">{t('nav.contact')}</button>
             <div className="pt-2">
               <Button 
                 onClick={() => scrollToSection('contact')} 
                 className="bg-quantaryx-darkblue hover:bg-quantaryx-darkblue/90 dark:bg-quantaryx-purple dark:hover:bg-quantaryx-purple/90 text-white w-full"
               >
-                請求演示
+                {t('nav.requestDemo')}
               </Button>
             </div>
           </div>
