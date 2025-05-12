@@ -27,12 +27,12 @@ const Navbar = () => {
   return (
     <nav className="fixed w-full bg-white/80 dark:bg-gray-900/95 backdrop-blur-md z-50 shadow-sm transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-3 lg:py-4">
           <div className="flex items-center">
             <span className="font-display font-bold text-2xl text-gradient">QuantaryX</span>
           </div>
           
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <button onClick={() => scrollToSection('products')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">{t('nav.products')}</button>
             <button onClick={() => scrollToSection('vision')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">{t('nav.vision')}</button>
             <button onClick={() => scrollToSection('investors')} className="font-medium text-gray-700 hover:text-quantaryx-purple dark:text-gray-300 dark:hover:text-quantaryx-purple transition-colors">{t('nav.investors')}</button>

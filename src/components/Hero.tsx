@@ -89,29 +89,29 @@ const Hero = () => {
       icon: <Brain className="h-5 w-5" />,
       title: t('hero.aiFeature.analysis'),
       description: t('hero.aiFeature.analysis.desc'),
-      insight: "分析顯示您的資產分配過度集中在科技股(38%)，遠高於建議的20%上限。同時，您的緊急基金只有1.2個月支出，低於建議的6個月水平。AI建議立即優化這兩個區域以降低風險。",
-      insightEn: "Analysis shows your asset allocation is overly concentrated in technology stocks (38%), far exceeding the recommended 20% maximum. Additionally, your emergency fund only covers 1.2 months of expenses, well below the recommended 6-month level. AI recommends immediate optimization in these two areas to reduce risk."
+      insight: language === 'en' ? t('hero.aiInsight.analysis') : "分析顯示您的資產分配過度集中在科技股(38%)，遠高於建議的20%上限。同時，您的緊急基金只有1.2個月支出，低於建議的6個月水平。AI建議立即優化這兩個區域以降低風險。",
+      insightEn: t('hero.aiInsight.analysis')
     },
     {
       icon: <ChartBar className="h-5 w-5" />,
       title: t('hero.aiFeature.optimization'),
       description: t('hero.aiFeature.optimization.desc'),
-      insight: "根據您的退休目標和當前市場條件，AI預測您目前的儲蓄率每月需額外增加¥15,000才能實現目標。系統已為您設計了三種方案來彌補這個差距，包括資產重新配置、開源和節流策略。",
-      insightEn: "Based on your retirement goals and current market conditions, AI predicts you need to increase your monthly savings by $2,100 to reach your target. The system has designed three plans to bridge this gap, including asset reallocation, income enhancement, and expense reduction strategies."
+      insight: language === 'en' ? t('hero.aiInsight.optimization') : "根據您的退休目標和當前市場條件，AI預測您目前的儲蓄率每月需額外增加¥15,000才能實現目標。系統已為您設計了三種方案來彌補這個差距，包括資產重新配置、開源和節流策略。",
+      insightEn: t('hero.aiInsight.optimization')
     },
     {
       icon: <Database className="h-5 w-5" />,
       title: t('hero.aiFeature.integration'),
       description: t('hero.aiFeature.integration.desc'),
-      insight: "AI發現您的跨機構資產中有三張保單存在重複保障，每年多支出¥28,500。此外，您的兩個閒置銀行賬戶每年產生¥3,600的不必要管理費。系統建議合併這些賬戶並優化保險組合。",
-      insightEn: "AI has identified three insurance policies with duplicate coverage across your institutional assets, resulting in an unnecessary annual expense of $4,000. Additionally, two idle bank accounts are generating $500 in unnecessary annual management fees. The system recommends consolidating these accounts and optimizing your insurance portfolio."
+      insight: language === 'en' ? t('hero.aiInsight.integration') : "AI發現您的跨機構資產中有三張保單存在重複保障，每年多支出¥28,500。此外，您的兩個閒置銀行賬戶每年產生¥3,600的不必要管理費。系統建議合併這些賬戶並優化保險組合。",
+      insightEn: t('hero.aiInsight.integration')
     },
     {
       icon: <Search className="h-5 w-5" />,
       title: t('hero.aiFeature.opportunity'),
       description: t('hero.aiFeature.opportunity.desc'),
-      insight: "基於您的投資偏好與風險承受度，AI已識別出三個特定領域的高潛力投資機會：1)低波動高收益債券基金 2)非美元計價的新興市場ETF 3)具有穩定股息增長的公用事業股。詳情請查看完整分析。",
-      insightEn: "Based on your investment preferences and risk tolerance, AI has identified high-potential investment opportunities in three specific areas: 1) Low-volatility high-yield bond funds 2) Non-USD denominated emerging market ETFs 3) Utility stocks with stable dividend growth. See the full analysis for details."
+      insight: language === 'en' ? t('hero.aiInsight.opportunity') : "基於您的投資偏好與風險承受度，AI已識別出三個特定領域的高潛力投資機會：1)低波動高收益債券基金 2)非美元計價的新興市場ETF 3)具有穩定股息增長的公用事業股。詳情請查看完整分析。",
+      insightEn: t('hero.aiInsight.opportunity')
     }
   ];
 
@@ -222,11 +222,11 @@ const Hero = () => {
   return (
     <div className="relative overflow-hidden bg-white dark:bg-gray-900">
       <div className="bg-grid absolute inset-0 opacity-20"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 lg:pt-32 pb-16 lg:pb-20">
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left flex flex-col justify-center">
             <div className="opacity-0 animate-fade-in">
-              <div className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-quantaryx-softblue dark:bg-purple-900/50 text-quantaryx-darkblue dark:text-gray-200 mb-6">
+              <div className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-quantaryx-softblue dark:bg-purple-900/50 text-quantaryx-darkblue dark:text-gray-200 mb-5">
                 <Brain className="h-4 w-4 mr-1.5" />
                 <span>{t('hero.badge')}</span>
               </div>
@@ -237,7 +237,7 @@ const Hero = () => {
               <span className="block text-gradient">{t('hero.title2')}</span>
             </h1>
             
-            <p className="opacity-0 animate-fade-in animate-delay-300 mt-3 text-base text-gray-500 dark:text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+            <p className="opacity-0 animate-fade-in animate-delay-300 mt-3 text-base text-gray-500 dark:text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl max-w-lg">
               {t('hero.description')}
             </p>
             
@@ -261,13 +261,13 @@ const Hero = () => {
             </div>
 
             {/* AI Feature Cards with better spacing and interactivity */}
-            <div className="opacity-0 animate-fade-in animate-delay-500 mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="opacity-0 animate-fade-in animate-delay-500 mt-6 grid grid-cols-1 md:grid-cols-2 gap-3">
               {AIFeatures.map((feature, index) => (
                 <div 
                   key={index}
                   className={`p-3 rounded-lg text-left transition-all cursor-pointer ${
                     activeFeature === index 
-                      ? "bg-quantaryx-purple/10 dark:bg-purple-700/30 border border-quantaryx-purple/30 dark:border-purple-500/50" 
+                      ? "bg-quantaryx-purple/10 dark:bg-purple-700/30 border border-quantaryx-purple/30 dark:border-purple-500/50 transform scale-[1.02]" 
                       : "hover:bg-gray-50 dark:hover:bg-gray-800/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
                   }`}
                   onClick={() => handleFeatureClick(index)}
@@ -351,11 +351,11 @@ const Hero = () => {
       {/* Advanced AI Features Section - Updated with Carousel */}
       <div className="bg-gray-50 dark:bg-gray-900 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-gradient mb-4">
               {t('hero.coreFeatures')}
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
               {t('hero.coreFeatures.desc')}
             </p>
           </div>
