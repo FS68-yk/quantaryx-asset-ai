@@ -260,29 +260,30 @@ const Hero = () => {
               </p>
             </div>
 
-            <div className="opacity-0 animate-fade-in animate-delay-500 mt-6 grid grid-cols-2 gap-4">
+            {/* AI Feature Cards with better spacing and interactivity */}
+            <div className="opacity-0 animate-fade-in animate-delay-500 mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
               {AIFeatures.map((feature, index) => (
-                <button 
+                <div 
                   key={index}
-                  className={`p-3 rounded-lg text-left transition-all ${
+                  className={`p-3 rounded-lg text-left transition-all cursor-pointer ${
                     activeFeature === index 
                       ? "bg-quantaryx-purple/10 dark:bg-purple-700/30 border border-quantaryx-purple/30 dark:border-purple-500/50" 
-                      : "hover:bg-gray-50 dark:hover:bg-gray-800 border border-transparent"
+                      : "hover:bg-gray-50 dark:hover:bg-gray-800/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
                   }`}
                   onClick={() => handleFeatureClick(index)}
                 >
-                  <div className="flex items-start">
-                    <div className={`p-2 rounded-md ${
+                  <div className="flex items-start space-x-3">
+                    <div className={`p-2 rounded-md shrink-0 ${
                       activeFeature === index ? "bg-quantaryx-purple text-white" : "bg-gray-100 dark:bg-gray-700"
                     }`}>
                       {feature.icon}
                     </div>
-                    <div className="ml-3">
-                      <h3 className="text-sm font-medium dark:text-white">{feature.title}</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{feature.description}</p>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-medium dark:text-white truncate">{feature.title}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">{feature.description}</p>
                     </div>
                   </div>
-                </button>
+                </div>
               ))}
             </div>
           </div>
@@ -326,12 +327,12 @@ const Hero = () => {
                     </div>
                     
                     {showAIInsight && (
-                      <div className="mt-3 p-3 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in text-left">
+                      <div className="mt-4 p-4 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in text-left">
                         <div className="flex items-center mb-2">
                           <Brain className="h-5 w-5 text-quantaryx-purple mr-2" />
                           <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">{t('hero.aiInsight')}</span>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                           {language === 'en' 
                             ? AIFeatures[activeFeature].insightEn 
                             : AIFeatures[activeFeature].insight
@@ -348,13 +349,13 @@ const Hero = () => {
       </div>
       
       {/* Advanced AI Features Section - Updated with Carousel */}
-      <div className="bg-gray-50 dark:bg-gray-900 py-12">
+      <div className="bg-gray-50 dark:bg-gray-900 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gradient mb-4">
               {t('hero.coreFeatures')}
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
               {t('hero.coreFeatures.desc')}
             </p>
           </div>
@@ -379,22 +380,23 @@ const Hero = () => {
                       }`}
                       onClick={() => handleAdvancedFeatureClick(feature)}
                     >
-                      <CardHeader>
+                      <CardHeader className="pb-2">
                         <div className="flex items-center mb-2">
                           {feature.icon}
-                          <CardTitle className="ml-3 text-lg dark:text-white">{feature.title}</CardTitle>
+                          <CardTitle className="ml-3 text-lg dark:text-white">{language === 'en' ? feature.titleEn || feature.title : feature.title}</CardTitle>
                         </div>
-                        <CardDescription className="dark:text-gray-400">{feature.description}</CardDescription>
+                        <CardDescription className="dark:text-gray-400">{language === 'en' ? feature.descriptionEn || feature.description : feature.description}</CardDescription>
                       </CardHeader>
-                      <CardContent>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">{feature.details}</p>
+                      <CardContent className="py-2">
+                        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
+                          {language === 'en' ? feature.detailsEn || feature.details : feature.details}
+                        </p>
                       </CardContent>
-                      <CardFooter>
+                      <CardFooter className="pt-0">
                         <Button 
                           variant="ghost" 
-                          size="sm" 
-                          className="text-quantaryx-purple dark:text-purple-400 mt-2 px-0"
-                          onClick={() => handleAdvancedFeatureClick(feature)}
+                          size="sm"
+                          className="text-quantaryx-purple dark:text-purple-400 hover:bg-quantaryx-purple/10 px-0"
                         >
                           {t('hero.feature.learnMore')} <ArrowRight className="ml-1 h-4 w-4" />
                         </Button>
@@ -416,7 +418,9 @@ const Hero = () => {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
                   {selectedFeature.icon}
-                  <h3 className="ml-3 font-bold text-xl dark:text-white">{selectedFeature.title}</h3>
+                  <h3 className="ml-3 font-bold text-xl dark:text-white">
+                    {language === 'en' ? selectedFeature.titleEn || selectedFeature.title : selectedFeature.title}
+                  </h3>
                 </div>
                 <Button 
                   variant="ghost" 
@@ -432,7 +436,7 @@ const Hero = () => {
                 <div>
                   <div className="mb-6">
                     <h4 className="font-medium mb-2 dark:text-white">{t('hero.feature.details')}</h4>
-                    <p className="text-gray-700 dark:text-gray-300">{selectedFeature.details}</p>
+                    <p className="text-gray-700 dark:text-gray-300">{language === 'en' ? selectedFeature.detailsEn || selectedFeature.details : selectedFeature.details}</p>
                   </div>
                   
                   <div className="mb-6">
@@ -441,7 +445,7 @@ const Hero = () => {
                       {t('hero.feature.advantage')}
                     </h4>
                     <p className="text-gray-700 dark:text-gray-300 text-sm border-l-2 border-quantaryx-purple/30 pl-3 py-1">
-                      {selectedFeature.uniqueFeature}
+                      {language === 'en' ? selectedFeature.uniqueFeatureEn || selectedFeature.uniqueFeature : selectedFeature.uniqueFeature}
                     </p>
                   </div>
                   
@@ -452,7 +456,7 @@ const Hero = () => {
                   
                   <ScrollArea className="h-[180px] border rounded p-2 dark:border-gray-700">
                     <ul className="space-y-2">
-                      {selectedFeature.capabilities.map((capability, idx) => (
+                      {(language === 'en' ? selectedFeature.capabilitiesEn || selectedFeature.capabilities : selectedFeature.capabilities).map((capability, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="h-5 w-5 rounded-full flex items-center justify-center mt-0.5 mr-2 bg-quantaryx-purple/10 dark:bg-purple-700/30 text-quantaryx-purple dark:text-purple-400">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-3 w-3">
@@ -476,8 +480,8 @@ const Hero = () => {
                       <Brain className="h-4 w-4 text-quantaryx-purple mr-2" />
                       <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">{t('hero.aiInsight')}</span>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      {selectedFeature.aiInsight}
+                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {language === 'en' ? selectedFeature.aiInsightEn || selectedFeature.aiInsight : selectedFeature.aiInsight}
                     </p>
                   </div>
                 </div>
