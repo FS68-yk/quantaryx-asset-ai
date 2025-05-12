@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Brain, ArrowRight, Activity, ChartBar, Database, Search, Briefcase, TrendingUp, BarChart3, ChartPie, Repeat } from 'lucide-react';
+import { Brain, ArrowRight, Activity, ChartBar, Database, Search, Briefcase, TrendingUp, BarChart3, ChartPie, Repeat, Watch, Clock } from 'lucide-react';
 import { ChartContainer } from '@/components/ui/chart';
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
 import { 
   Carousel,
   CarouselContent,
@@ -14,7 +14,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { advancedFeatures } from './hero/constants';
 
-const mockData = [
+// Monthly asset data
+const monthlyAssetData = [
   { month: '1月', value: 40 },
   { month: '2月', value: 60 },
   { month: '3月', value: 30 },
@@ -29,7 +30,16 @@ const mockData = [
   { month: '12月', value: 60 },
 ];
 
-const pieData = [
+// Risk-reward data for investment optimization
+const riskRewardData = [
+  { name: '保守型', risk: 20, return: 30, size: 100 },
+  { name: '平衡型', risk: 45, return: 60, size: 150 },
+  { name: '增長型', risk: 70, return: 85, size: 200 },
+  { name: '激進型', risk: 95, return: 120, size: 120 }
+];
+
+// Asset allocation data
+const assetAllocationData = [
   { name: '股票', value: 35 },
   { name: '債券', value: 20 },
   { name: '不動產', value: 25 },
@@ -37,6 +47,33 @@ const pieData = [
   { name: '現金', value: 5 },
 ];
 
+// Data integration metrics
+const dataIntegrationData = [
+  { name: '銀行賬戶', count: 8, complete: 100 },
+  { name: '證券賬戶', count: 3, complete: 95 },
+  { name: '房地產', count: 4, complete: 80 },
+  { name: '退休賬戶', count: 2, complete: 90 },
+  { name: '私募投資', count: 5, complete: 65 },
+  { name: '保險產品', count: 3, complete: 75 }
+];
+
+// Investment opportunity data
+const opportunityData = [
+  { month: '1月', historical: 40, predicted: 42 },
+  { month: '2月', historical: 60, predicted: 63 },
+  { month: '3月', historical: 30, predicted: 32 },
+  { month: '4月', historical: 70, predicted: 75 },
+  { month: '5月', historical: 50, predicted: 52 },
+  { month: '6月', historical: 80, predicted: 86 },
+  { month: '7月', historical: 40, predicted: 42 },
+  { month: '8月', historical: 90, predicted: 94 },
+  { month: '9月', historical: 60, predicted: 64 },
+  { month: '10月', historical: 70, predicted: 74 },
+  { month: '11月', historical: 50, predicted: 52 },
+  { month: '12月', historical: 60, predicted: null },
+];
+
+// Portfolio performance data
 const portfolioData = [
   { date: '1/1', value: 100 },
   { date: '2/1', value: 105 },
@@ -50,6 +87,14 @@ const portfolioData = [
   { date: '10/1', value: 170 },
   { date: '11/1', value: 165 },
   { date: '12/1', value: 180 },
+];
+
+// Alternative assets data
+const altAssetsData = [
+  { name: '1M', value: 7800 },
+  { name: '2M', value: 7950 },
+  { name: '3M', value: 8100 },
+  { name: '4M', value: 8200 },
 ];
 
 const COLORS = ['#9b87f5', '#33C3F0', '#FF8042', '#7E69AB', '#1EAEDB'];
@@ -81,10 +126,30 @@ const Hero = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const [showAIInsight, setShowAIInsight] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState(null);
+  const [currentView, setCurrentView] = useState('overview'); // 'overview', 'altAssets', 'details'
+  const [chartMode, setChartMode] = useState('bar'); // 'bar', 'pie', 'line', 'area', 'bubble', 'altAssets'
 
   const handleFeatureClick = (index: number) => {
     setActiveFeature(index);
     setShowAIInsight(true);
+    
+    // Set the appropriate chart mode based on which feature was clicked
+    switch(index) {
+      case 0: // 智慧資產分析
+        setChartMode('bar');
+        break;
+      case 1: // 自動投資優化
+        setChartMode('bubble');
+        break;
+      case 2: // 智能資料整合
+        setChartMode('pie');
+        break;
+      case 3: // 投資機會識別
+        setChartMode('area');
+        break;
+      default:
+        setChartMode('bar');
+    }
   };
 
   const handleAdvancedFeatureClick = (feature: any) => {
@@ -101,13 +166,17 @@ const Hero = () => {
     }
   };
 
+  const toggleAltAssetsView = () => {
+    setCurrentView(currentView === 'altAssets' ? 'overview' : 'altAssets');
+  };
+
   const renderChart = (chartType: string) => {
     if (chartType === 'pie') {
       return (
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
-              data={pieData}
+              data={assetAllocationData}
               cx="50%"
               cy="50%"
               innerRadius={60}
@@ -117,7 +186,7 @@ const Hero = () => {
               dataKey="value"
               label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
             >
-              {pieData.map((entry, index) => (
+              {assetAllocationData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
@@ -156,6 +225,40 @@ const Hero = () => {
           </LineChart>
         </ResponsiveContainer>
       );
+    } else if (chartType === 'area') {
+      return (
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart data={opportunityData}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
+            <XAxis dataKey="month" fontSize={10} tickLine={false} axisLine={false} />
+            <YAxis hide />
+            <Tooltip 
+              formatter={(value) => [`$${Number(value).toLocaleString()}`, '預測']}
+              contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', border: '1px solid #ccc' }}
+              labelStyle={{ color: '#333' }}
+              itemStyle={{ color: '#333' }}
+              className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
+            />
+            <Area 
+              type="monotone" 
+              dataKey="historical" 
+              stackId="1" 
+              stroke="#9b87f5" 
+              fill="#9b87f5" 
+              fillOpacity={0.6}
+            />
+            <Area 
+              type="monotone" 
+              dataKey="predicted" 
+              stackId="2" 
+              stroke="#33C3F0" 
+              fill="#33C3F0" 
+              fillOpacity={0.3}
+              strokeDasharray="3 3" 
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      );
     } else if (chartType === 'advanced') {
       return (
         <div className="p-2 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg h-full flex flex-col justify-center items-center">
@@ -166,12 +269,101 @@ const Hero = () => {
           </div>
         </div>
       );
+    } else if (chartType === 'bubble') {
+      return (
+        <ResponsiveContainer width="100%" height="100%">
+          <div className="h-full w-full flex items-center justify-center relative">
+            {riskRewardData.map((item, index) => (
+              <div 
+                key={index}
+                className="absolute flex flex-col items-center justify-center rounded-full text-center"
+                style={{
+                  width: `${item.size / 2}px`,
+                  height: `${item.size / 2}px`,
+                  backgroundColor: `${COLORS[index % COLORS.length]}`,
+                  opacity: 0.7,
+                  left: `${item.risk}%`,
+                  bottom: `${item.return / 2}%`,
+                  transform: 'translate(-50%, 50%)',
+                }}
+              >
+                <span className="text-white text-xs font-bold whitespace-nowrap">
+                  {item.name}
+                </span>
+                <span className="text-white text-[8px] whitespace-nowrap">
+                  回報: {item.return / 10}%
+                </span>
+              </div>
+            ))}
+            <div className="absolute bottom-0 left-0 right-0 border-t border-gray-300 dark:border-gray-600"></div>
+            <div className="absolute left-0 top-0 bottom-0 border-r border-gray-300 dark:border-gray-600"></div>
+            <span className="absolute bottom-0 right-0 text-xs text-gray-500 dark:text-gray-400">風險</span>
+            <span className="absolute top-0 left-0 text-xs text-gray-500 dark:text-gray-400">回報</span>
+          </div>
+        </ResponsiveContainer>
+      );
+    } else if (chartType === 'altAssets') {
+      return (
+        <div className="h-full flex flex-col">
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-bold dark:text-white">Tracking Alternative Assets</h3>
+            <span className="text-2xl font-bold dark:text-white">$8,200</span>
+          </div>
+          
+          <div className="flex-1 flex items-end justify-between mt-4">
+            {altAssetsData.map((item, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div 
+                  className="w-14 rounded-t-md shadow-md transition-all duration-300 hover:opacity-90"
+                  style={{ 
+                    height: `${(item.value / 8200) * 160}px`,
+                    background: 'linear-gradient(to top, #4F46E5, #818CF8)'
+                  }}
+                ></div>
+                <div className="mt-2 text-xs font-medium dark:text-gray-300">{item.name}</div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex items-center p-3 mt-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3">
+              <Watch className="h-5 w-5 text-blue-500" />
+            </div>
+            <div>
+              <h4 className="font-medium text-sm dark:text-white">Watch</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-300">Track the price of your watch and other assets</p>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (chartType === 'dataIntegration') {
+      return (
+        <ResponsiveContainer width="100%" height="100%">
+          <div className="h-full w-full flex flex-col justify-between p-2">
+            {dataIntegrationData.map((item, index) => (
+              <div key={index} className="flex items-center mb-2">
+                <div className="w-32 text-xs text-gray-600 dark:text-gray-400">{item.name}</div>
+                <div className="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full rounded-full" 
+                    style={{
+                      width: `${item.complete}%`,
+                      background: COLORS[index % COLORS.length]
+                    }}
+                  ></div>
+                </div>
+                <div className="w-10 text-xs text-right ml-2 text-gray-600 dark:text-gray-400">{item.complete}%</div>
+              </div>
+            ))}
+          </div>
+        </ResponsiveContainer>
+      );
     } else {
       return (
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={mockData} barSize={20}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
-            <XAxis dataKey="month" fontSize={10} tickLine={false} axisLine={false} />
+          <BarChart data={monthlyAssetData} barSize={20}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} stroke="#444" className="dark:stroke-gray-600" />
+            <XAxis dataKey="month" fontSize={10} tickLine={false} axisLine={false} stroke="#888" className="dark:text-gray-400" />
             <YAxis hide />
             <Tooltip 
               formatter={(value) => [`$${Number(value).toLocaleString()}`, '淨值']}
@@ -183,17 +375,166 @@ const Hero = () => {
             />
             <Bar 
               dataKey="value" 
-              fill="url(#colorGradient)" 
+              fill="#9b87f5"
               radius={[4, 4, 0, 0]}
             />
-            <defs>
-              <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#9b87f5" />
-                <stop offset="100%" stopColor="#c2b5fa" />
-              </linearGradient>
-            </defs>
           </BarChart>
         </ResponsiveContainer>
+      );
+    }
+  };
+
+  const renderDashboardView = () => {
+    if (currentView === 'altAssets') {
+      // Alternative assets 3D-style view
+      return (
+        <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-xl shadow-xl animate-float p-6">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              <span className="text-sm font-medium dark:text-gray-200">另類資產追蹤</span>
+            </div>
+            <span className="text-2xl font-bold dark:text-white">$8,200</span>
+          </div>
+
+          <div className="h-60 w-full">
+            {renderChart('altAssets')}
+          </div>
+          
+          <div className="mt-4 flex justify-end">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-quantaryx-purple dark:text-purple-400"
+              onClick={toggleAltAssetsView}
+            >
+              返回資產總覽 <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      );
+    } else if (currentView === 'details') {
+      // Detailed charts based on selected AI feature
+      let chartTitle = "";
+      let chartSubtitle = "";
+      
+      switch(activeFeature) {
+        case 0:
+          chartTitle = "資產淨值趨勢";
+          chartSubtitle = "月度資產變化";
+          break;
+        case 1:
+          chartTitle = "投資組合優化";
+          chartSubtitle = "風險與回報分析";
+          break;
+        case 2:
+          chartTitle = "數據整合狀態";
+          chartSubtitle = "各資料來源完整度";
+          break;
+        case 3:
+          chartTitle = "投資機會預測";
+          chartSubtitle = "歷史與預測表現";
+          break;
+        default:
+          chartTitle = "資產總覽";
+          chartSubtitle = "";
+      }
+      
+      return (
+        <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-xl shadow-xl animate-float p-6">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <h3 className="text-lg font-bold dark:text-white">{chartTitle}</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{chartSubtitle}</p>
+            </div>
+            <span className="text-2xl font-bold dark:text-white">$5.43M</span>
+          </div>
+
+          <div className="h-60 w-full">
+            {activeFeature === 0 && renderChart('bar')}
+            {activeFeature === 1 && renderChart('bubble')}
+            {activeFeature === 2 && renderChart('dataIntegration')}
+            {activeFeature === 3 && renderChart('area')}
+          </div>
+          
+          {showAIInsight && (
+            <div className="mt-3 p-3 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in text-left">
+              <div className="flex items-center mb-1">
+                <Brain className="h-4 w-4 text-quantaryx-purple mr-2" />
+                <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">AI 智能洞察</span>
+              </div>
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                {AIFeatures[activeFeature].title === "智慧資產分析" && "分析顯示您的資產在8月達到高峰，建議關注流動性分配以優化年底稅務籌劃。"}
+                {AIFeatures[activeFeature].title === "自動投資優化" && "根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。"}
+                {AIFeatures[activeFeature].title === "智能資料整合" && "系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。"}
+                {AIFeatures[activeFeature].title === "投資機會識別" && "AI檢測到5檔符合您投資風格的高潛力標的，點擊查看詳細分析報告。"}
+              </p>
+            </div>
+          )}
+          
+          <div className="mt-4 flex justify-end">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-quantaryx-purple dark:text-purple-400"
+              onClick={() => setCurrentView('overview')}
+            >
+              返回資產總覽 <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      );
+    } else {
+      // Default overview
+      return (
+        <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-xl shadow-xl animate-float p-6">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-quantaryx-green rounded-full"></div>
+              <span className="text-sm font-medium dark:text-gray-200">資產總覽</span>
+            </div>
+            <span className="text-2xl font-bold dark:text-white">$5.43M</span>
+          </div>
+
+          <div className="h-60 w-full">
+            {renderChart(chartMode)}
+          </div>
+          
+          {showAIInsight && (
+            <div className="mt-3 p-3 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in text-left">
+              <div className="flex items-center mb-1">
+                <Brain className="h-4 w-4 text-quantaryx-purple mr-2" />
+                <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">AI 智能洞察</span>
+              </div>
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                {AIFeatures[activeFeature].title === "智慧資產分析" && "分析顯示您的資產在8月達到高峰，建議關注流動性分配以優化年底稅務籌劃。"}
+                {AIFeatures[activeFeature].title === "自動投資優化" && "根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。"}
+                {AIFeatures[activeFeature].title === "智能資料整合" && "系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。"}
+                {AIFeatures[activeFeature].title === "投資機會識別" && "AI檢測到5檔符合您投資風格的高潛力標的，點擊查看詳細分析報告。"}
+              </p>
+            </div>
+          )}
+          
+          <div className="mt-4 flex justify-between">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-quantaryx-purple dark:text-purple-400"
+              onClick={() => setCurrentView('details')}
+            >
+              查看詳細分析 <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-quantaryx-purple dark:text-purple-400"
+              onClick={toggleAltAssetsView}
+            >
+              查看另類資產 <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
       );
     }
   };
@@ -269,60 +610,8 @@ const Hero = () => {
           <div className="opacity-0 animate-fade-in animate-delay-700 mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
             <div className="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
               <div className="relative block w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
-                <div className="w-full h-auto bg-gradient-to-br from-quantaryx-purple/50 to-quantaryx-brightblue/30 rounded-lg p-6">
-                  <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-xl shadow-xl animate-float p-6">
-                    <div className="flex justify-between items-center mb-4">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 bg-quantaryx-green rounded-full"></div>
-                        <span className="text-sm font-medium dark:text-gray-200">資產總覽</span>
-                      </div>
-                      <span className="text-2xl font-bold dark:text-white">$5.43M</span>
-                    </div>
-
-                    <div className="h-60 w-full">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={mockData} barSize={20}>
-                          <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} />
-                          <XAxis dataKey="month" fontSize={10} tickLine={false} axisLine={false} stroke="#888" />
-                          <YAxis hide />
-                          <Tooltip 
-                            formatter={(value) => [`$${Number(value).toLocaleString()}`, '淨值']}
-                            cursor={{fill: 'rgba(155, 135, 245, 0.1)'}}
-                            contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', border: '1px solid #ccc' }}
-                            labelStyle={{ color: '#333' }}
-                            itemStyle={{ color: '#333' }}
-                            className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
-                          />
-                          <Bar 
-                            dataKey="value" 
-                            fill="url(#colorGradient)" 
-                            radius={[4, 4, 0, 0]}
-                          />
-                          <defs>
-                            <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#9b87f5" />
-                              <stop offset="100%" stopColor="#c2b5fa" />
-                            </linearGradient>
-                          </defs>
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                    
-                    {showAIInsight && (
-                      <div className="mt-3 p-3 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in text-left">
-                        <div className="flex items-center mb-1">
-                          <Brain className="h-4 w-4 text-quantaryx-purple mr-2" />
-                          <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">AI 智能洞察</span>
-                        </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-300">
-                          {AIFeatures[activeFeature].title === "智慧資產分析" && "分析顯示您的資產在8月達到高峰，建議關注流動性分配以優化年底稅務籌劃。"}
-                          {AIFeatures[activeFeature].title === "自動投資優化" && "根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。"}
-                          {AIFeatures[activeFeature].title === "智能資料整合" && "系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。"}
-                          {AIFeatures[activeFeature].title === "投資機會識別" && "AI檢測到5檔符合您投資風格的高潛力標的，點擊查看詳細分析報告。"}
-                        </p>
-                      </div>
-                    )}
-                  </div>
+                <div className="w-full h-auto bg-gradient-to-br from-quantaryx-purple/50 to-quantaryx-brightblue/30 dark:from-purple-800/50 dark:to-blue-600/30 rounded-lg p-6">
+                  {renderDashboardView()}
                 </div>
               </div>
             </div>
