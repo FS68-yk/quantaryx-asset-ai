@@ -14,7 +14,7 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 // Translation object
-const translations = {
+const translations: Record<Language, Record<string, string>> = {
   'zh-TW': {
     // Navbar
     'nav.products': '產品',
@@ -45,45 +45,32 @@ const translations = {
     'hero.aiInsight.optimization': '根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。',
     'hero.aiInsight.integration': '系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。',
     'hero.aiInsight.opportunity': 'AI檢測到5檔符合您投資風格的高潛力標的，點擊查看詳細分析報告。',
-    'hero.detailedView.title': '詳細分析',
-    'hero.detailedView.back': '返回',
-    'hero.altAssets.title': '另類資產追蹤',
-    'hero.altAssets.back': '返回',
-    'hero.altAssets.description': '追蹤您的高價值收藏品、古董、藝術品和其他非傳統投資的估值和表現。AI定期從市場數據更新估值。',
-    'hero.coreFeatures': 'QuantaryX 核心 AI 功能',
-    'hero.coreFeatures.desc': '滑動卡片探索我們如何運用人工智能重新定義財富管理體驗',
-    'hero.detailInfo.analysis': 'AI分析顯示您的資產淨值在第三季度呈現成長趨勢，但有季節性波動。系統檢測到年底前可能需要調整流動性以應對稅務需求。',
-    'hero.detailInfo.optimization': '根據當前市場情況和您的風險容忍度(中等)，AI系統建議將投資組合從「增長型」調整為更趋「平衡型」，增加防禦性資產比例10%。',
-    'hero.detailInfo.integration': '資料整合引擎已成功連接12個金融機構的API，處理超過1,500份報表和交易記錄。AI已建立超過320個資產關聯和86個交易模式。',
-    'hero.detailInfo.opportunity': '基於您過去交易模式和投資偏好，AI從超過5,000個投資標的中篩選出5檔高潛力標的。這些推薦結合了基本面分析、技術指標和情緒指標。',
     'hero.feature.details': '功能詳情',
     'hero.feature.advantage': '獲取優勢',
     'hero.feature.capabilities': 'AI 驅動能力',
     'hero.feature.close': '關閉',
     'hero.feature.learnMore': '了解更多',
-
+    'hero.coreFeatures': 'QuantaryX 核心 AI 功能',
+    'hero.coreFeatures.desc': '滑動卡片探索我們如何運用人工智能重新定義財富管理體驗',
+    
     // Products
     'products.title': '四大產品矩陣',
     'products.subtitle': 'QuantaryX 為高資產個人與專業投資者打造的完整解決方案',
-    'products.finora.title': 'Finora',
     'products.finora.subtitle': '讓你第一次完整掌握自己的財務人生。',
     'products.finora.feature1': 'AI 財務大腦：為每筆交易、每個資產建立關聯圖譜',
     'products.finora.feature2': '自動解析財務文件：報表、轉帳紀錄自動整合',
     'products.finora.feature3': '財務狀況即時可視化：多維度淨值走勢與分析',
     'products.finora.feature4': '資產變動 AI 預警系統：主動告知風險或錯誤配置',
-    'products.wiselens.title': 'Wiselens',
     'products.wiselens.subtitle': '讓 AI 幫你組投資組合、幫你下單、還幫你換倉。',
     'products.wiselens.feature1': '即時投資儀表板：基金表現、NAV 一眼看清',
     'products.wiselens.feature2': 'AI ETF 組合推薦系統：根據畫像設計組合',
     'products.wiselens.feature3': '策略型自動交易引擎：支援訂投、止損、止盈',
     'products.wiselens.feature4': '一鍵下單 + API 串接券商/銀行：直接執行',
-    'products.nurocrm.title': 'NuroCRM',
     'products.nurocrm.subtitle': '幫你記得每一個對話背後的意圖，預測下一步該說什麼。',
     'products.nurocrm.feature1': '語音/對話內容語意分析：識別情緒波動、偏好',
     'products.nurocrm.feature2': '智能行動建議與產品配對：生成潛在推薦',
     'products.nurocrm.feature3': '關係深度提醒系統：主動提醒適當跟進時機',
     'products.nurocrm.feature4': '會前摘要 & 客戶個性報告自動生成',
-    'products.deallens.title': 'DealLens',
     'products.deallens.subtitle': '你不需要再 manually 看 50 份 pitch deck，AI 幫你挑出值得關注的。',
     'products.deallens.feature1': '自動抓取投資案源：從多渠道同步 PDF、Deck',
     'products.deallens.feature2': 'AI 摘要提煉與評級建議：提取關鍵資訊',
@@ -115,6 +102,7 @@ const translations = {
     'investor.market.family': '家族辦公室管理資產',
     'investor.market.growth': '金融科技年增長率',
     'investor.market.potential': 'AI 財富管理市場潛力',
+    'trillion': '兆美元',
     
     // CTA
     'cta.title': '準備好',
@@ -187,45 +175,32 @@ const translations = {
     'hero.aiInsight.optimization': 'Based on your risk preference and market volatility, AI recommends increasing defensive assets by 10% to balance your portfolio.',
     'hero.aiInsight.integration': 'The system has automatically integrated data from 12 financial institutions and identified 3 duplicated asset items.',
     'hero.aiInsight.opportunity': 'AI has detected 5 high-potential targets matching your investment style. Click to view detailed analysis reports.',
-    'hero.detailedView.title': 'Detailed Analysis',
-    'hero.detailedView.back': 'Back',
-    'hero.altAssets.title': 'Alternative Assets Tracking',
-    'hero.altAssets.back': 'Back',
-    'hero.altAssets.description': 'Track the valuation and performance of your high-value collectibles, antiques, art, and other non-traditional investments. AI regularly updates valuations from market data.',
-    'hero.coreFeatures': 'QuantaryX Core AI Features',
-    'hero.coreFeatures.desc': 'Swipe cards to explore how we use artificial intelligence to redefine wealth management',
-    'hero.detailInfo.analysis': 'AI analysis shows your net worth has a growth trend in Q3 but with seasonal fluctuations. The system detects potential need for liquidity adjustments for year-end tax requirements.',
-    'hero.detailInfo.optimization': 'Based on current market conditions and your risk tolerance (medium), the AI system recommends adjusting your portfolio from "Growth" to more "Balanced," increasing defensive assets by 10%.',
-    'hero.detailInfo.integration': 'The data integration engine has successfully connected to APIs from 12 financial institutions, processing over 1,500 statements and transaction records. AI has established over 320 asset relationships and 86 transaction patterns.',
-    'hero.detailInfo.opportunity': 'Based on your past trading patterns and investment preferences, AI has filtered out 5 high-potential targets from over 5,000 investment options. These recommendations combine fundamental analysis, technical indicators, and sentiment indicators.',
     'hero.feature.details': 'Feature Details',
     'hero.feature.advantage': 'Advantages',
     'hero.feature.capabilities': 'AI-Driven Capabilities',
     'hero.feature.close': 'Close',
     'hero.feature.learnMore': 'Learn More',
+    'hero.coreFeatures': 'QuantaryX Core AI Features',
+    'hero.coreFeatures.desc': 'Swipe cards to explore how we use artificial intelligence to redefine wealth management',
     
     // Products
     'products.title': 'Four Product Suites',
     'products.subtitle': 'Complete solutions for high-net-worth individuals and professional investors',
-    'products.finora.title': 'Finora',
     'products.finora.subtitle': 'Complete control over your financial life for the first time.',
     'products.finora.feature1': 'AI Financial Brain: Build relationship graphs for every transaction and asset',
     'products.finora.feature2': 'Automatic document parsing: Seamlessly integrate statements and transfers',
     'products.finora.feature3': 'Real-time financial visualization: Multi-dimensional net worth trends and analysis',
     'products.finora.feature4': 'Asset change AI alert system: Proactive risk and misallocation notifications',
-    'products.wiselens.title': 'Wiselens',
     'products.wiselens.subtitle': 'Let AI build your portfolio, place orders, and rebalance your investments.',
     'products.wiselens.feature1': 'Real-time investment dashboard: Clear view of fund performance and NAV',
     'products.wiselens.feature2': 'AI ETF portfolio recommendation system: Custom portfolios based on profiles',
     'products.wiselens.feature3': 'Strategic automated trading engine: Support for subscriptions, stop-loss, take-profit',
     'products.wiselens.feature4': 'One-click orders + API integration with brokers/banks: Direct execution',
-    'products.nurocrm.title': 'NuroCRM',
     'products.nurocrm.subtitle': 'Remembers the intent behind every conversation and predicts what to say next.',
     'products.nurocrm.feature1': 'Voice/conversation semantic analysis: Identify emotional shifts and preferences',
     'products.nurocrm.feature2': 'Intelligent action suggestions and product matching: Generate potential recommendations',
     'products.nurocrm.feature3': 'Relationship depth reminder system: Proactive reminders for timely follow-ups',
     'products.nurocrm.feature4': 'Auto-generation of pre-meeting summaries & client personality reports',
-    'products.deallens.title': 'DealLens',
     'products.deallens.subtitle': 'No need to manually review 50 pitch decks, AI helps identify the ones worth attention.',
     'products.deallens.feature1': 'Automatic investment source tracking: Sync PDFs and decks from multiple channels',
     'products.deallens.feature2': 'AI summary extraction and rating recommendations: Extract key information',
@@ -257,6 +232,7 @@ const translations = {
     'investor.market.family': 'Family Office AUM',
     'investor.market.growth': 'Fintech Annual Growth',
     'investor.market.potential': 'AI Wealth Management Market',
+    'trillion': 'trillion',
     
     // CTA
     'cta.title': 'Ready to',
@@ -310,7 +286,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
   });
 
   // Function to translate keys
-  const t = (key: string) => {
+  const t = (key: string): string => {
     return translations[language][key] || key;
   };
 
