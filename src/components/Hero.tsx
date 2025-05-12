@@ -13,64 +13,65 @@ import {
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { advancedFeatures } from './hero/constants';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Monthly asset data
 const monthlyAssetData = [
-  { month: '1月', value: 40 },
-  { month: '2月', value: 60 },
-  { month: '3月', value: 30 },
-  { month: '4月', value: 70 },
-  { month: '5月', value: 50 },
-  { month: '6月', value: 80 },
-  { month: '7月', value: 40 },
-  { month: '8月', value: 90 },
-  { month: '9月', value: 60 },
-  { month: '10月', value: 70 },
-  { month: '11月', value: 50 },
-  { month: '12月', value: 60 }
+  { month: '1', value: 40 },
+  { month: '2', value: 60 },
+  { month: '3', value: 30 },
+  { month: '4', value: 70 },
+  { month: '5', value: 50 },
+  { month: '6', value: 80 },
+  { month: '7', value: 40 },
+  { month: '8', value: 90 },
+  { month: '9', value: 60 },
+  { month: '10', value: 70 },
+  { month: '11', value: 50 },
+  { month: '12', value: 60 }
 ];
 
 // Risk-reward data for investment optimization
 const riskRewardData = [
-  { name: '保守型', risk: 20, return: 30, size: 100 },
-  { name: '平衡型', risk: 45, return: 60, size: 150 },
-  { name: '增長型', risk: 70, return: 85, size: 200 },
-  { name: '激進型', risk: 95, return: 120, size: 120 }
+  { name: 'Conservative', risk: 20, return: 30, size: 100 },
+  { name: 'Balanced', risk: 45, return: 60, size: 150 },
+  { name: 'Growth', risk: 70, return: 85, size: 200 },
+  { name: 'Aggressive', risk: 95, return: 120, size: 120 }
 ];
 
 // Asset allocation data
 const assetAllocationData = [
-  { name: '股票', value: 35 },
-  { name: '債券', value: 20 },
-  { name: '不動產', value: 25 },
-  { name: '另類投資', value: 15 },
-  { name: '現金', value: 5 }
+  { name: 'Stocks', value: 35 },
+  { name: 'Bonds', value: 20 },
+  { name: 'Real Estate', value: 25 },
+  { name: 'Alternative', value: 15 },
+  { name: 'Cash', value: 5 }
 ];
 
 // Data integration metrics
 const dataIntegrationData = [
-  { name: '銀行賬戶', count: 8, complete: 100 },
-  { name: '證券賬戶', count: 3, complete: 95 },
-  { name: '房地產', count: 4, complete: 80 },
-  { name: '退休賬戶', count: 2, complete: 90 },
-  { name: '私募投資', count: 5, complete: 65 },
-  { name: '保險產品', count: 3, complete: 75 }
+  { name: 'Bank Accounts', count: 8, complete: 100 },
+  { name: 'Securities', count: 3, complete: 95 },
+  { name: 'Real Estate', count: 4, complete: 80 },
+  { name: 'Retirement', count: 2, complete: 90 },
+  { name: 'Private Invest', count: 5, complete: 65 },
+  { name: 'Insurance', count: 3, complete: 75 }
 ];
 
 // Investment opportunity data
 const opportunityData = [
-  { month: '1月', historical: 40, predicted: 42 },
-  { month: '2月', historical: 60, predicted: 63 },
-  { month: '3月', historical: 30, predicted: 32 },
-  { month: '4月', historical: 70, predicted: 75 },
-  { month: '5月', historical: 50, predicted: 52 },
-  { month: '6月', historical: 80, predicted: 86 },
-  { month: '7月', historical: 40, predicted: 42 },
-  { month: '8月', historical: 90, predicted: 94 },
-  { month: '9月', historical: 60, predicted: 64 },
-  { month: '10月', historical: 70, predicted: 74 },
-  { month: '11月', historical: 50, predicted: 52 },
-  { month: '12月', historical: 60, predicted: null }
+  { month: '1', historical: 40, predicted: 42 },
+  { month: '2', historical: 60, predicted: 63 },
+  { month: '3', historical: 30, predicted: 32 },
+  { month: '4', historical: 70, predicted: 75 },
+  { month: '5', historical: 50, predicted: 52 },
+  { month: '6', historical: 80, predicted: 86 },
+  { month: '7', historical: 40, predicted: 42 },
+  { month: '8', historical: 90, predicted: 94 },
+  { month: '9', historical: 60, predicted: 64 },
+  { month: '10', historical: 70, predicted: 74 },
+  { month: '11', historical: 50, predicted: 52 },
+  { month: '12', historical: 60, predicted: null }
 ];
 
 // Portfolio performance data
@@ -99,55 +100,57 @@ const altAssetsData = [
 
 // Alternative asset types for detail view
 const altAssetTypes = [
-  { name: "名表", value: 28500, change: "+5.2%" },
-  { name: "藝術品", value: 124000, change: "+2.8%" },
-  { name: "珠寶", value: 45200, change: "+1.7%" },
-  { name: "收藏品", value: 18600, change: "+8.3%" }
+  { name: "Watches", value: 28500, change: "+5.2%" },
+  { name: "Art", value: 124000, change: "+2.8%" },
+  { name: "Jewelry", value: 45200, change: "+1.7%" },
+  { name: "Collectibles", value: 18600, change: "+8.3%" }
 ];
 
 const COLORS = ['#9b87f5', '#33C3F0', '#FF8042', '#7E69AB', '#1EAEDB'];
 
-const AIFeatures = [
-  {
-    icon: <Brain className="h-5 w-5" />,
-    title: "智慧資產分析",
-    description: "AI強化的資產淨值趨勢預測與風險識別",
-    insight: "分析顯示您的資產在8月達到高峰，建議關注流動性分配以優化年底稅務籌劃。",
-    chartType: "bar",
-    detailInfo: "AI分析顯示您的資產淨值在第三季度呈現成長趨勢，但有季節性波動。系統檢測到年底前可能需要調整流動性以應對稅務需求。"
-  },
-  {
-    icon: <ChartBar className="h-5 w-5" />,
-    title: "自動投資優化",
-    description: "基於市場行為的AI驅動投資策略調整",
-    insight: "根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。",
-    chartType: "scatter",
-    detailInfo: "根據當前市場情況和您的風險容忍度(中等)，AI系統建議將投資組合從「增長型」調整為更趨「平衡型」，增加防禦性資產比例10%。"
-  },
-  {
-    icon: <Database className="h-5 w-5" />,
-    title: "智能資料整合",
-    description: "多源財務數據自動解析與關聯構建",
-    insight: "系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。",
-    chartType: "bar-progress",
-    detailInfo: "資料整合引擎已成功連接12個金融機構的API，處理超過1,500份報表和交易記錄。AI已建立超過320個資產關聯和86個交易模式。"
-  },
-  {
-    icon: <Search className="h-5 w-5" />,
-    title: "投資機會識別",
-    description: "AI篩選高價值投資標的與市場時機",
-    insight: "AI檢測到5檔符合您投資風格的高潛力標的，點擊查看詳細分析報告。",
-    chartType: "area",
-    detailInfo: "基於您過去交易模式和投資偏好，AI從超過5,000個投資標的中篩選出5檔高潛力標的。這些推薦結合了基本面分析、技術指標和情緒指標。"
-  }
-];
-
 const Hero = () => {
+  const { t, language } = useLanguage();
   const [activeFeature, setActiveFeature] = useState(0);
   const [showAIInsight, setShowAIInsight] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState(null);
   const [showDetailedView, setShowDetailedView] = useState(false);
   const [showAlternativeAssets, setShowAlternativeAssets] = useState(false);
+
+  // Localized AI Features
+  const AIFeatures = [
+    {
+      icon: <Brain className="h-5 w-5" />,
+      title: t('hero.aiFeature.analysis'),
+      description: t('hero.aiFeature.analysis.desc'),
+      insight: t('hero.aiInsight.analysis'),
+      chartType: "bar",
+      detailInfo: t('hero.detailInfo.analysis')
+    },
+    {
+      icon: <ChartBar className="h-5 w-5" />,
+      title: t('hero.aiFeature.optimization'),
+      description: t('hero.aiFeature.optimization.desc'),
+      insight: t('hero.aiInsight.optimization'),
+      chartType: "scatter",
+      detailInfo: t('hero.detailInfo.optimization')
+    },
+    {
+      icon: <Database className="h-5 w-5" />,
+      title: t('hero.aiFeature.integration'),
+      description: t('hero.aiFeature.integration.desc'),
+      insight: t('hero.aiInsight.integration'),
+      chartType: "bar-progress",
+      detailInfo: t('hero.detailInfo.integration')
+    },
+    {
+      icon: <Search className="h-5 w-5" />,
+      title: t('hero.aiFeature.opportunity'),
+      description: t('hero.aiFeature.opportunity.desc'),
+      insight: t('hero.aiInsight.opportunity'),
+      chartType: "area",
+      detailInfo: t('hero.detailInfo.opportunity')
+    }
+  ];
 
   const handleFeatureClick = (index) => {
     setActiveFeature(index);
@@ -180,11 +183,29 @@ const Hero = () => {
     setShowDetailedView(false);
   };
 
+  // Get the correct data based on the current language
+  const getLocalizedData = (dataArray, keyField) => {
+    if (language === 'en') {
+      return dataArray;
+    }
+    
+    // For Chinese, we need month names with 月 suffix
+    if (keyField === 'month') {
+      return dataArray.map(item => ({
+        ...item,
+        month: `${item.month}月`
+      }));
+    }
+    
+    return dataArray;
+  };
+
   const renderChart = (chartType) => {
     if (chartType === "bar") {
+      const data = getLocalizedData(monthlyAssetData, 'month');
       return (
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={monthlyAssetData} barSize={20}>
+          <BarChart data={data} barSize={20}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.2} stroke="var(--grid-color, rgba(155, 155, 155, 0.3))" />
             <XAxis 
               dataKey="month" 
@@ -195,7 +216,7 @@ const Hero = () => {
             />
             <YAxis hide />
             <Tooltip 
-              formatter={(value) => [`$${Number(value).toLocaleString()}`, '淨值']}
+              formatter={(value) => [`$${Number(value).toLocaleString()}`, language === 'en' ? 'Net Worth' : '淨值']}
               cursor={{fill: 'rgba(155, 135, 245, 0.1)'}}
               contentStyle={{
                 backgroundColor: 'var(--tooltip-bg, rgba(255, 255, 255, 0.95))',
@@ -218,6 +239,15 @@ const Hero = () => {
         </ResponsiveContainer>
       );
     } else if (chartType === "scatter") {
+      const data = riskRewardData.map(item => ({
+        ...item,
+        name: language === 'zh-TW' ? 
+          (item.name === 'Conservative' ? '保守型' : 
+           item.name === 'Balanced' ? '平衡型' : 
+           item.name === 'Growth' ? '增長型' : 
+           item.name === 'Aggressive' ? '激進型' : item.name) : item.name
+      }));
+
       return (
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
@@ -231,24 +261,24 @@ const Hero = () => {
             <XAxis 
               type="number" 
               dataKey="risk" 
-              name="風險" 
+              name={language === 'en' ? "Risk" : "風險"} 
               domain={[0, 100]}
               tick={{ fill: 'var(--tick-color, #666)' }}
-              label={{ value: '風險', position: 'bottom', fill: 'var(--axis-label, #666)' }}
+              label={{ value: language === 'en' ? "Risk" : "風險", position: 'bottom', fill: 'var(--axis-label, #666)' }}
             />
             <YAxis 
               type="number" 
               dataKey="return" 
-              name="報酬" 
+              name={language === 'en' ? "Return" : "報酬"} 
               domain={[0, 130]}
               tick={{ fill: 'var(--tick-color, #666)' }}
-              label={{ value: '報酬', angle: -90, position: 'left', fill: 'var(--axis-label, #666)' }}
+              label={{ value: language === 'en' ? "Return" : "報酬", angle: -90, position: 'left', fill: 'var(--axis-label, #666)' }}
             />
             <ZAxis type="number" dataKey="size" range={[50, 300]} />
             <Tooltip 
               formatter={(value, name) => {
-                if (name === 'risk') return [`${value}%`, '風險'];
-                if (name === 'return') return [`${value}%`, '預期報酬'];
+                if (name === 'risk') return [`${value}%`, language === 'en' ? 'Risk' : '風險'];
+                if (name === 'return') return [`${value}%`, language === 'en' ? 'Expected Return' : '預期報酬'];
                 return [value, name];
               }}
               cursor={{ strokeDasharray: '3 3' }}
@@ -259,8 +289,8 @@ const Hero = () => {
               }}
             />
             <Scatter 
-              name="投資組合" 
-              data={riskRewardData} 
+              name={language === 'en' ? "Portfolio" : "投資組合"} 
+              data={data} 
               fill="#9b87f5"
               strokeWidth={2}
             />
@@ -268,11 +298,21 @@ const Hero = () => {
         </ResponsiveContainer>
       );
     } else if (chartType === "pie") {
+      const data = assetAllocationData.map(item => ({
+        ...item,
+        name: language === 'zh-TW' ? 
+          (item.name === 'Stocks' ? '股票' : 
+           item.name === 'Bonds' ? '債券' : 
+           item.name === 'Real Estate' ? '不動產' : 
+           item.name === 'Alternative' ? '另類投資' : 
+           item.name === 'Cash' ? '現金' : item.name) : item.name
+      }));
+
       return (
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
-              data={assetAllocationData}
+              data={data}
               cx="50%"
               cy="50%"
               innerRadius={60}
@@ -283,7 +323,7 @@ const Hero = () => {
               labelLine={false}
               label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
             >
-              {assetAllocationData.map((entry, index) => (
+              {data.map((entry, index) => (
                 <Cell 
                   key={`cell-${index}`} 
                   fill={COLORS[index % COLORS.length]} 
@@ -291,7 +331,7 @@ const Hero = () => {
               ))}
             </Pie>
             <Tooltip 
-              formatter={(value) => [`${value}%`, '占比']}
+              formatter={(value) => [`${value}%`, language === 'en' ? 'Percentage' : '占比']}
               contentStyle={{
                 backgroundColor: 'var(--tooltip-bg, rgba(255, 255, 255, 0.95))',
                 borderColor: 'var(--tooltip-border, #ddd)',
@@ -302,11 +342,22 @@ const Hero = () => {
         </ResponsiveContainer>
       );
     } else if (chartType === "bar-progress") {
+      const data = dataIntegrationData.map(item => ({
+        ...item,
+        name: language === 'zh-TW' ? 
+          (item.name === 'Bank Accounts' ? '銀行賬戶' : 
+           item.name === 'Securities' ? '證券賬戶' : 
+           item.name === 'Real Estate' ? '房地產' : 
+           item.name === 'Retirement' ? '退休賬戶' : 
+           item.name === 'Private Invest' ? '私募投資' : 
+           item.name === 'Insurance' ? '保險產品' : item.name) : item.name
+      }));
+
       return (
         <ResponsiveContainer width="100%" height="100%">
           <BarChart 
             layout="vertical"
-            data={dataIntegrationData}
+            data={data}
             margin={{ top: 5, right: 30, left: 90, bottom: 5 }}
           >
             <CartesianGrid 
@@ -327,8 +378,8 @@ const Hero = () => {
               tick={{ fill: 'var(--tick-color, #666)' }}
             />
             <Tooltip 
-              formatter={(value) => [`${value}%`, '完成度']}
-              labelFormatter={(label) => `${label} (${dataIntegrationData.find(item => item.name === label).count}個)`}
+              formatter={(value) => [`${value}%`, language === 'en' ? 'Completion' : '完成度']}
+              labelFormatter={(label) => `${label} (${dataIntegrationData.find(item => item.name === label).count}${language === 'en' ? '' : '個'})`}
               contentStyle={{
                 backgroundColor: 'var(--tooltip-bg, rgba(255, 255, 255, 0.95))',
                 borderColor: 'var(--tooltip-border, #ddd)',
@@ -345,10 +396,12 @@ const Hero = () => {
         </ResponsiveContainer>
       );
     } else if (chartType === "area") {
+      const data = getLocalizedData(opportunityData, 'month');
+      
       return (
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            data={opportunityData}
+            data={data}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
             <CartesianGrid 
@@ -363,7 +416,7 @@ const Hero = () => {
             />
             <YAxis hide />
             <Tooltip 
-              formatter={(value) => [`$${Number(value).toLocaleString()}`, '表現']}
+              formatter={(value) => [`$${Number(value).toLocaleString()}`, language === 'en' ? 'Performance' : '表現']}
               contentStyle={{
                 backgroundColor: 'var(--tooltip-bg, rgba(255, 255, 255, 0.95))',
                 borderColor: 'var(--tooltip-border, #ddd)',
@@ -376,7 +429,7 @@ const Hero = () => {
               stroke="#8884d8" 
               fillOpacity={0.3}
               fill="url(#colorHistorical)" 
-              name="歷史表現"
+              name={language === 'en' ? "Historical" : "歷史表現"}
             />
             <Area 
               type="monotone" 
@@ -384,7 +437,7 @@ const Hero = () => {
               stroke="#82ca9d" 
               fillOpacity={0.3}
               fill="url(#colorPredicted)" 
-              name="AI預測"
+              name={language === 'en' ? "AI Prediction" : "AI預測"}
               strokeDasharray="5 5"
             />
             <defs>
@@ -419,7 +472,7 @@ const Hero = () => {
             />
             <YAxis hide />
             <Tooltip 
-              formatter={(value) => [`$${Number(value).toLocaleString()}`, '表現']}
+              formatter={(value) => [`$${Number(value).toLocaleString()}`, language === 'en' ? 'Performance' : '表現']}
               cursor={{fill: 'rgba(155, 135, 245, 0.1)'}}
               contentStyle={{
                 backgroundColor: 'var(--tooltip-bg, rgba(255, 255, 255, 0.95))',
@@ -438,13 +491,22 @@ const Hero = () => {
         </ResponsiveContainer>
       );
     } else if (chartType === "alt-assets") {
+      const assets = altAssetTypes.map(item => ({
+        ...item,
+        name: language === 'zh-TW' ? 
+          (item.name === 'Watches' ? '名表' : 
+           item.name === 'Art' ? '藝術品' : 
+           item.name === 'Jewelry' ? '珠寶' : 
+           item.name === 'Collectibles' ? '收藏品' : item.name) : item.name
+      }));
+
       return (
         <div className="flex flex-col space-y-4">
           <div className="w-full h-40 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg mb-2">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center">
                 <Watch className="h-5 w-5 mr-2 text-blue-500" />
-                <h3 className="font-bold text-lg dark:text-white">另類資產追蹤</h3>
+                <h3 className="font-bold text-lg dark:text-white">{t('hero.altAssets.title')}</h3>
               </div>
               <div className="font-bold text-2xl dark:text-white">$216,300</div>
             </div>
@@ -465,7 +527,7 @@ const Hero = () => {
           </div>
           
           <div className="grid grid-cols-2 gap-2">
-            {altAssetTypes.map((asset, index) => (
+            {assets.map((asset, index) => (
               <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-3 shadow flex items-center space-x-3">
                 <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
                   {index === 0 ? <Watch className="h-4 w-4 text-blue-500" /> : 
@@ -491,8 +553,12 @@ const Hero = () => {
         <div className="p-2 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg h-full flex flex-col justify-center items-center">
           <Brain className="h-12 w-12 text-quantaryx-purple mb-2 animate-pulse" />
           <div className="text-center">
-            <p className="font-medium text-quantaryx-darkblue dark:text-gray-200">AI 正在分析您的投資組合</p>
-            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">發現潛在機會與風險...</p>
+            <p className="font-medium text-quantaryx-darkblue dark:text-gray-200">
+              {language === 'en' ? 'AI is analyzing your portfolio' : 'AI 正在分析您的投資組合'}
+            </p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              {language === 'en' ? 'Discovering potential opportunities and risks...' : '發現潛在機會與風險...'}
+            </p>
           </div>
         </div>
       );
@@ -508,17 +574,17 @@ const Hero = () => {
             <div className="opacity-0 animate-fade-in">
               <div className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-quantaryx-softblue dark:bg-purple-900/40 text-quantaryx-darkblue dark:text-gray-200 mb-6">
                 <Brain className="h-4 w-4 mr-1.5" />
-                <span>新一代AI財富管理系統</span>
+                <span>{t('hero.badge')}</span>
               </div>
             </div>
             
             <h1 className="opacity-0 animate-fade-in animate-delay-200 text-4xl tracking-tight font-bold text-gray-900 dark:text-white sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-              <span className="block">用人工智能</span>
-              <span className="block text-gradient">重新定義資產掌控</span>
+              <span className="block">{t('hero.title1')}</span>
+              <span className="block text-gradient">{t('hero.title2')}</span>
             </h1>
             
             <p className="opacity-0 animate-fade-in animate-delay-300 mt-3 text-base text-gray-500 dark:text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-              QuantaryX 整合AI深度學習、知識圖譜與自然語言處理技術，為高資產個人與專業投資者提供全方位的資產可視化、智能決策與自動化執行平台。
+              {t('hero.description')}
             </p>
             
             <div className="opacity-0 animate-fade-in animate-delay-400 mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
@@ -526,17 +592,17 @@ const Hero = () => {
                 <Button 
                   onClick={() => scrollToSection('contact')}
                   className="bg-quantaryx-purple hover:bg-quantaryx-purple/90 text-white px-8 py-6 text-lg">
-                  開始使用
+                  {t('hero.cta.start')}
                 </Button>
                 <Button 
                   onClick={() => scrollToSection('products')}
                   variant="outline" 
                   className="border-quantaryx-purple text-quantaryx-purple dark:text-quantaryx-purple dark:border-quantaryx-purple hover:bg-quantaryx-purple/10 px-8 py-6 text-lg">
-                  了解更多
+                  {t('hero.cta.learnMore')}
                 </Button>
               </div>
               <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-                專為高資產個人與專業投資者設計
+                {t('hero.designedFor')}
               </p>
             </div>
 
@@ -575,7 +641,7 @@ const Hero = () => {
                     <div className="flex justify-between items-center mb-4">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 bg-quantaryx-green rounded-full"></div>
-                        <span className="text-sm font-medium dark:text-white">資產總覽</span>
+                        <span className="text-sm font-medium dark:text-white">{t('hero.assetOverview')}</span>
                       </div>
                       <span className="text-2xl font-bold dark:text-white">$5.43M</span>
                     </div>
@@ -584,13 +650,13 @@ const Hero = () => {
                       <div className="h-[360px] w-full">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="text-sm font-medium dark:text-white">
-                            {AIFeatures[activeFeature].title} - 詳細分析
+                            {AIFeatures[activeFeature].title} - {t('hero.detailedView.title')}
                           </h4>
                           <button 
                             onClick={toggleDetailedView}
                             className="text-xs text-gray-500 dark:text-gray-400 hover:text-quantaryx-purple dark:hover:text-quantaryx-purple"
                           >
-                            返回
+                            {t('hero.detailedView.back')}
                           </button>
                         </div>
                         <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg text-left mb-4">
@@ -611,18 +677,18 @@ const Hero = () => {
                       <div className="h-[360px] w-full">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="text-sm font-medium dark:text-white">
-                            另類資產追蹤
+                            {t('hero.altAssets.title')}
                           </h4>
                           <button 
                             onClick={toggleAlternativeAssets}
                             className="text-xs text-gray-500 dark:text-gray-400 hover:text-quantaryx-purple dark:hover:text-quantaryx-purple"
                           >
-                            返回
+                            {t('hero.altAssets.back')}
                           </button>
                         </div>
                         <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg text-left mb-4">
                           <p className="text-sm text-gray-700 dark:text-gray-300">
-                            追蹤您的高價值收藏品、古董、藝術品和其他非傳統投資的估值和表現。AI定期從市場數據更新估值。
+                            {t('hero.altAssets.description')}
                           </p>
                         </div>
                         {renderChart("alt-assets")}
@@ -659,7 +725,7 @@ const Hero = () => {
                       <div className="mt-3 p-3 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in text-left">
                         <div className="flex items-center mb-1">
                           <Brain className="h-4 w-4 text-quantaryx-purple mr-2" />
-                          <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">AI 智能洞察</span>
+                          <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">{t('hero.aiInsight')}</span>
                         </div>
                         <p className="text-xs text-gray-600 dark:text-gray-300">
                           {AIFeatures[activeFeature].insight}
@@ -679,10 +745,10 @@ const Hero = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-gradient mb-4">
-              QuantaryX 核心 AI 功能
+              {t('hero.coreFeatures')}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              滑動卡片探索我們如何運用人工智能重新定義財富管理體驗
+              {t('hero.coreFeatures.desc')}
             </p>
           </div>
           
@@ -709,12 +775,42 @@ const Hero = () => {
                       <CardHeader>
                         <div className="flex items-center mb-2">
                           {feature.icon}
-                          <CardTitle className="ml-3 text-lg dark:text-white">{feature.title}</CardTitle>
+                          <CardTitle className="ml-3 text-lg dark:text-white">
+                            {language === 'en' ? 
+                              (feature.id === 'wealth-overview' ? 'Wealth Overview' :
+                               feature.id === 'alternative-investments' ? 'Alternative Investments' :
+                               feature.id === 'real-time-tracking' ? 'Real-time Tracking' :
+                               feature.id === 'automated-trading' ? 'Automated Trading' :
+                               feature.id === 'full-ai' ? 'Full AI Experience' :
+                               feature.title) : 
+                              feature.title
+                            }
+                          </CardTitle>
                         </div>
-                        <CardDescription className="dark:text-gray-400">{feature.description}</CardDescription>
+                        <CardDescription className="dark:text-gray-400">
+                          {language === 'en' ? 
+                            (feature.id === 'wealth-overview' ? 'AI-driven comprehensive wealth dashboard' :
+                             feature.id === 'alternative-investments' ? 'Smart tracking of private equity, real estate, and art' :
+                             feature.id === 'real-time-tracking' ? 'Instant market volatility updates with AI analysis' :
+                             feature.id === 'automated-trading' ? 'AI strategy-driven intelligent trading system' :
+                             feature.id === 'full-ai' ? 'Complete AI assistant for wealth management' :
+                             feature.description) : 
+                            feature.description
+                          }
+                        </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">{feature.details}</p>
+                        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
+                          {language === 'en' ? 
+                            (feature.id === 'wealth-overview' ? 'Our AI system automatically connects and analyzes all your asset data to create a comprehensive wealth dashboard.' :
+                             feature.id === 'alternative-investments' ? 'QuantaryX\'s AI system can track, analyze, and evaluate alternative investments that are traditionally difficult to quantify.' :
+                             feature.id === 'real-time-tracking' ? 'Our AI system tracks your portfolio performance in real-time and provides instant insights and recommendations.' :
+                             feature.id === 'automated-trading' ? 'QuantaryX\'s AI trading system can execute trading strategies automatically based on your risk preferences and investment goals.' :
+                             feature.id === 'full-ai' ? 'Our AI wealth assistant understands your long-term financial goals and proactively provides insights, suggestions, and decision support.' :
+                             feature.details) : 
+                            feature.details
+                          }
+                        </p>
                       </CardContent>
                       <CardFooter>
                         <Button 
@@ -723,7 +819,7 @@ const Hero = () => {
                           className="text-quantaryx-purple dark:text-purple-400 dark:hover:text-purple-300 mt-2 px-0"
                           onClick={() => handleAdvancedFeatureClick(feature)}
                         >
-                          了解更多 <ArrowRight className="ml-1 h-4 w-4" />
+                          {t('hero.feature.learnMore')} <ArrowRight className="ml-1 h-4 w-4" />
                         </Button>
                       </CardFooter>
                     </Card>
@@ -743,7 +839,17 @@ const Hero = () => {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
                   {selectedFeature.icon}
-                  <h3 className="ml-3 font-bold text-xl dark:text-white">{selectedFeature.title}</h3>
+                  <h3 className="ml-3 font-bold text-xl dark:text-white">
+                    {language === 'en' ? 
+                      (selectedFeature.id === 'wealth-overview' ? 'Wealth Overview' :
+                       selectedFeature.id === 'alternative-investments' ? 'Alternative Investments' :
+                       selectedFeature.id === 'real-time-tracking' ? 'Real-time Tracking' :
+                       selectedFeature.id === 'automated-trading' ? 'Automated Trading' :
+                       selectedFeature.id === 'full-ai' ? 'Full AI Experience' :
+                       selectedFeature.title) : 
+                      selectedFeature.title
+                    }
+                  </h3>
                 </div>
                 <Button 
                   variant="ghost" 
@@ -751,30 +857,48 @@ const Hero = () => {
                   onClick={() => setSelectedFeature(null)}
                   className="text-gray-500 dark:text-gray-400"
                 >
-                  關閉
+                  {t('hero.feature.close')}
                 </Button>
               </div>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <div className="mb-6">
-                    <h4 className="font-medium mb-2 dark:text-white">功能詳情</h4>
-                    <p className="text-gray-700 dark:text-gray-300">{selectedFeature.details}</p>
+                    <h4 className="font-medium mb-2 dark:text-white">{t('hero.feature.details')}</h4>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      {language === 'en' ? 
+                        (selectedFeature.id === 'wealth-overview' ? 'Our AI system automatically connects and analyzes all your asset data, including bank accounts, investment portfolios, real estate, private equity, and cryptocurrencies, to create a comprehensive wealth dashboard.' :
+                         selectedFeature.id === 'alternative-investments' ? 'QuantaryX\'s AI system can track, analyze, and evaluate alternative investments that are traditionally difficult to quantify, including private equity, real estate, collectibles, and art.' :
+                         selectedFeature.id === 'real-time-tracking' ? 'Our AI system not only tracks your portfolio performance in real-time but also intelligently analyzes how market volatility affects your assets, providing instant insights and recommendations.' :
+                         selectedFeature.id === 'automated-trading' ? 'QuantaryX\'s AI trading system can automatically execute trading strategies based on your risk preferences and investment goals, including rebalancing, stop-loss, and strategic entry/exit.' :
+                         selectedFeature.id === 'full-ai' ? 'Our AI wealth assistant understands your long-term financial goals and proactively provides insights, suggestions, and decision support, making wealth management unprecedentedly simple and intelligent.' :
+                         selectedFeature.details) : 
+                        selectedFeature.details
+                      }
+                    </p>
                   </div>
                   
                   <div className="mb-6">
                     <h4 className="font-medium mb-2 flex items-center dark:text-white">
                       <span className="inline-block w-2 h-2 bg-quantaryx-purple rounded-full mr-2"></span>
-                      獲取優勢
+                      {t('hero.feature.advantage')}
                     </h4>
                     <p className="text-gray-700 dark:text-gray-300 text-sm border-l-2 border-quantaryx-purple/30 dark:border-purple-500/30 pl-3 py-1">
-                      {selectedFeature.uniqueFeature}
+                      {language === 'en' ? 
+                        (selectedFeature.id === 'wealth-overview' ? 'Our biggest differentiator is the ability to automatically process unstructured financial documents - from bank statements to investment memoranda, the AI system can extract key data and establish relationships.' :
+                         selectedFeature.id === 'alternative-investments' ? 'The only platform on the market that can build dynamic valuation models for unlisted assets, integrating multiple valuation methods and continuously updating valuations based on new information.' :
+                         selectedFeature.id === 'real-time-tracking' ? 'Unique event-driven monitoring system that can identify signals in news, social media, and market data related to your portfolio and calculate potential impacts.' :
+                         selectedFeature.id === 'automated-trading' ? 'Industry-first tax-optimized trading engine that automatically considers tax implications when executing rebalancing and adjustments to maximize after-tax returns.' :
+                         selectedFeature.id === 'full-ai' ? 'Breakthrough AI wealth assistant that can understand your financial goals and preferences through natural language conversations and learn your decision patterns over time to provide increasingly personalized recommendations.' :
+                         selectedFeature.uniqueFeature) : 
+                        selectedFeature.uniqueFeature
+                      }
                     </p>
                   </div>
                   
                   <h4 className="font-medium mb-3 flex items-center dark:text-white">
                     <Brain className="h-4 w-4 mr-2 text-quantaryx-purple" />
-                    AI 驅動能力
+                    {t('hero.feature.capabilities')}
                   </h4>
                   
                   <ScrollArea className="h-[180px] border rounded p-2 dark:border-gray-700">
@@ -786,7 +910,37 @@ const Hero = () => {
                               <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                           </span>
-                          <span className="text-sm dark:text-gray-300">{capability}</span>
+                          <span className="text-sm dark:text-gray-300">
+                            {language === 'en' ? 
+                              (selectedFeature.id === 'wealth-overview' && idx === 0 ? 'Automatic asset classification and tagging' :
+                               selectedFeature.id === 'wealth-overview' && idx === 1 ? 'Cross-institution asset integration and synchronization' :
+                               selectedFeature.id === 'wealth-overview' && idx === 2 ? 'AI anomaly detection and risk alerts' :
+                               selectedFeature.id === 'wealth-overview' && idx === 3 ? 'Predictive net worth change trend analysis' :
+                               
+                               selectedFeature.id === 'alternative-investments' && idx === 0 ? 'Illiquid asset valuation AI models' :
+                               selectedFeature.id === 'alternative-investments' && idx === 1 ? 'Private investment performance tracking engine' :
+                               selectedFeature.id === 'alternative-investments' && idx === 2 ? 'Alternative investments and public market correlation analysis' :
+                               selectedFeature.id === 'alternative-investments' && idx === 3 ? 'Intelligent liquidity forecasting and strategy recommendations' :
+                               
+                               selectedFeature.id === 'real-time-tracking' && idx === 0 ? 'Real-time market data and portfolio impact analysis' :
+                               selectedFeature.id === 'real-time-tracking' && idx === 1 ? 'News events and asset correlation AI detection' :
+                               selectedFeature.id === 'real-time-tracking' && idx === 2 ? 'Portfolio real-time risk assessment' :
+                               selectedFeature.id === 'real-time-tracking' && idx === 3 ? 'Sentiment analysis and market trend prediction' :
+                               
+                               selectedFeature.id === 'automated-trading' && idx === 0 ? 'Smart rebalancing and tax-optimized trading' :
+                               selectedFeature.id === 'automated-trading' && idx === 1 ? 'Dynamic stop-loss/take-profit strategy execution' :
+                               selectedFeature.id === 'automated-trading' && idx === 2 ? 'Multi-factor AI trading signal generation' :
+                               selectedFeature.id === 'automated-trading' && idx === 3 ? 'Portfolio hedging automatic adjustment' :
+                               
+                               selectedFeature.id === 'full-ai' && idx === 0 ? 'Natural language financial query system' :
+                               selectedFeature.id === 'full-ai' && idx === 1 ? 'Intelligent decision recommendation engine' :
+                               selectedFeature.id === 'full-ai' && idx === 2 ? 'Cross-asset class correlation analysis' :
+                               selectedFeature.id === 'full-ai' && idx === 3 ? 'Personalized wealth goal tracking and adjustment' :
+                               
+                               capability) : 
+                              capability
+                            }
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -821,10 +975,18 @@ const Hero = () => {
                   <div className="mt-3 p-4 bg-quantaryx-softblue/20 dark:bg-purple-900/20 rounded-lg border border-quantaryx-softblue/30 dark:border-purple-700/30 animate-fade-in">
                     <div className="flex items-center mb-2">
                       <Brain className="h-4 w-4 text-quantaryx-purple mr-2" />
-                      <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">AI 智能洞察</span>
+                      <span className="text-sm font-medium text-quantaryx-darkblue dark:text-gray-200">{t('hero.aiInsight')}</span>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                      {selectedFeature.aiInsight}
+                      {language === 'en' ? 
+                        (selectedFeature.id === 'wealth-overview' ? 'Our AI can predict your cash flow and liquidity needs for the next 12 months based on your asset allocation, ensuring you don\'t need to sell assets urgently when funds are needed.' :
+                         selectedFeature.id === 'alternative-investments' ? 'The system has discovered that your alternative investment portfolio has an 85% positive correlation with specific economic indicators, which may cause a significant impact during economic downturns. Consider adding hedging strategies.' :
+                         selectedFeature.id === 'real-time-tracking' ? 'Based on the latest market data and news analysis, the system has detected that three tech stocks you hold may be affected by upcoming regulatory policies. Recommend paying attention to related developments.' :
+                         selectedFeature.id === 'automated-trading' ? 'Analysis shows that after adopting the AI automated trading strategy, your portfolio\'s annualized volatility has decreased by 15% while maintaining similar returns.' :
+                         selectedFeature.id === 'full-ai' ? 'Based on your financial decisions and goal setting over the past 6 months, the AI system has built your financial preference model and can now predict your acceptance level for various investment suggestions with 85% accuracy.' :
+                         selectedFeature.aiInsight) : 
+                        selectedFeature.aiInsight
+                      }
                     </p>
                   </div>
                 </div>

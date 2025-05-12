@@ -1,14 +1,17 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Check } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const InvestorSection = () => {
+  const { t } = useLanguage();
+  
   const investorBenefits = [
-    "革命性 AI 資產管理技術，重新定義財富管理市場",
-    "龐大高凈值個人與機構投資者客戶群體",
-    "全面產品矩陣，完整覆蓋資產管理全流程",
-    "高度可擴展的 SaaS 商業模式",
-    "專業團隊融合 AI、金融與產品開發經驗"
+    t('investor.benefit1'),
+    t('investor.benefit2'),
+    t('investor.benefit3'),
+    t('investor.benefit4'),
+    t('investor.benefit5')
   ];
 
   return (
@@ -17,10 +20,10 @@ const InvestorSection = () => {
         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
           <div className="mb-10 lg:mb-0">
             <h2 className="text-3xl font-bold mb-6 text-left opacity-0 animate-fade-in">
-              投資機會
+              {t('investor.title')}
             </h2>
             <p className="text-xl mb-8 text-white/80 text-left opacity-0 animate-fade-in animate-delay-100">
-              QuantaryX 正在尋求下一輪融資以加速產品開發與市場擴張。我們邀請有遠見的投資者成為重新定義資產管理未來的一部分。
+              {t('investor.subtitle')}
             </p>
             
             <div className="opacity-0 animate-fade-in animate-delay-200">
@@ -38,20 +41,20 @@ const InvestorSection = () => {
             
             <div className="opacity-0 animate-fade-in animate-delay-300">
               <Button className="bg-white text-quantaryx-purple hover:bg-white/90">
-                投資者資料包
+                {t('investor.button')}
               </Button>
             </div>
           </div>
           
           <div className="lg:pl-10 opacity-0 animate-fade-in animate-delay-400">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-              <h3 className="text-2xl font-bold mb-6 text-left">市場機會</h3>
+              <h3 className="text-2xl font-bold mb-6 text-left">{t('investor.market.title')}</h3>
               
               <div className="space-y-6 text-left">
                 <div>
                   <div className="flex justify-between mb-1">
-                    <span className="font-medium">全球高凈值個人市場</span>
-                    <span className="font-bold">$80+ 兆美元</span>
+                    <span className="font-medium">{t('investor.market.hnwi')}</span>
+                    <span className="font-bold">$80+ {t('trillion')}</span>
                   </div>
                   <div className="w-full h-2 bg-white/20 rounded-full">
                     <div className="h-2 bg-white rounded-full" style={{ width: "85%" }}></div>
@@ -60,8 +63,8 @@ const InvestorSection = () => {
                 
                 <div>
                   <div className="flex justify-between mb-1">
-                    <span className="font-medium">家族辦公室管理資產</span>
-                    <span className="font-bold">$5.9+ 兆美元</span>
+                    <span className="font-medium">{t('investor.market.family')}</span>
+                    <span className="font-bold">$5.9+ {t('trillion')}</span>
                   </div>
                   <div className="w-full h-2 bg-white/20 rounded-full">
                     <div className="h-2 bg-white rounded-full" style={{ width: "65%" }}></div>
@@ -70,7 +73,7 @@ const InvestorSection = () => {
                 
                 <div>
                   <div className="flex justify-between mb-1">
-                    <span className="font-medium">金融科技年增長率</span>
+                    <span className="font-medium">{t('investor.market.growth')}</span>
                     <span className="font-bold">23.4%</span>
                   </div>
                   <div className="w-full h-2 bg-white/20 rounded-full">
@@ -80,8 +83,8 @@ const InvestorSection = () => {
                 
                 <div>
                   <div className="flex justify-between mb-1">
-                    <span className="font-medium">AI 財富管理市場潛力</span>
-                    <span className="font-bold">$4.2+ 兆美元</span>
+                    <span className="font-medium">{t('investor.market.potential')}</span>
+                    <span className="font-bold">$4.2+ {t('trillion')}</span>
                   </div>
                   <div className="w-full h-2 bg-white/20 rounded-full">
                     <div className="h-2 bg-white rounded-full" style={{ width: "75%" }}></div>

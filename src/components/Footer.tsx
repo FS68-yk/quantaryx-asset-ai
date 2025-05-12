@@ -1,7 +1,9 @@
 import React from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
   
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -20,12 +22,12 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">QuantaryX</h3>
             <p className="text-gray-300">
-              AI驅動的個人與機構資產作業系統，重新定義資產理解與財富掌控方式。
+              {t('footer.description')}
             </p>
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4">產品</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.products')}</h3>
             <ul className="space-y-2">
               <li><button onClick={() => scrollToSection('products')} className="text-gray-300 hover:text-white transition-colors">Finora</button></li>
               <li><button onClick={() => scrollToSection('products')} className="text-gray-300 hover:text-white transition-colors">Wiselens</button></li>
@@ -35,17 +37,17 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4">公司</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.company')}</h3>
             <ul className="space-y-2">
-              <li><button onClick={() => scrollToSection('vision')} className="text-gray-300 hover:text-white transition-colors">關於我們</button></li>
-              <li><button onClick={() => scrollToSection('vision')} className="text-gray-300 hover:text-white transition-colors">團隊</button></li>
-              <li><button onClick={() => scrollToSection('investors')} className="text-gray-300 hover:text-white transition-colors">投資者關係</button></li>
-              <li><button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-white transition-colors">新聞</button></li>
+              <li><button onClick={() => scrollToSection('vision')} className="text-gray-300 hover:text-white transition-colors">{t('footer.about')}</button></li>
+              <li><button onClick={() => scrollToSection('vision')} className="text-gray-300 hover:text-white transition-colors">{t('footer.team')}</button></li>
+              <li><button onClick={() => scrollToSection('investors')} className="text-gray-300 hover:text-white transition-colors">{t('footer.investors')}</button></li>
+              <li><button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-white transition-colors">{t('footer.news')}</button></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4">聯繫我們</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.contact')}</h3>
             <ul className="space-y-2">
               <li className="text-gray-300">info@quantaryx.com</li>
               <li className="text-gray-300">+886 2 1234 5678</li>
@@ -71,11 +73,11 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-300">© {currentYear} QuantaryX. 版權所有。</div>
+          <div className="text-gray-300">© {currentYear} QuantaryX. {t('footer.rights')}</div>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <button className="text-gray-300 hover:text-white transition-colors text-sm">隱私政策</button>
-            <button className="text-gray-300 hover:text-white transition-colors text-sm">服務條款</button>
-            <button className="text-gray-300 hover:text-white transition-colors text-sm">安全性</button>
+            <button className="text-gray-300 hover:text-white transition-colors text-sm">{t('footer.privacy')}</button>
+            <button className="text-gray-300 hover:text-white transition-colors text-sm">{t('footer.terms')}</button>
+            <button className="text-gray-300 hover:text-white transition-colors text-sm">{t('footer.security')}</button>
           </div>
         </div>
       </div>

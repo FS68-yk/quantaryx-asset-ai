@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Brain, ChartBar, Database, Search, Briefcase, Activity, Repeat, ChartPie } from 'lucide-react';
 import { FeatureItem } from './types';
