@@ -285,14 +285,19 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
     return (saved as Language) || 'zh-TW';
   });
 
-  // Function to translate keys - fixed to be more robust with undefined handling
+  // Function to translate keys with enhanced error handling
   const t = (key: string): string => {
-    // First check if the language exists in the translations
+    // Check if key is a valid string
+    if (typeof key !== 'string' || !key) {
+      return String(key || '');
+    }
+    
+    // Check if the language exists in translations
     if (!translations[language]) {
       return key;
     }
     
-    // Then check if the key exists in the language translations
+    // Get the translation
     const translation = translations[language][key];
     
     // Return the translation if it's a string, otherwise return the key
