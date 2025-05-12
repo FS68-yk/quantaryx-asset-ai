@@ -97,6 +97,14 @@ const altAssetsData = [
   { name: '4M', value: 8200 }
 ];
 
+// Alternative asset types for detail view
+const altAssetTypes = [
+  { name: "名表", value: 28500, change: "+5.2%" },
+  { name: "藝術品", value: 124000, change: "+2.8%" },
+  { name: "珠寶", value: 45200, change: "+1.7%" },
+  { name: "收藏品", value: 18600, change: "+8.3%" }
+];
+
 const COLORS = ['#9b87f5', '#33C3F0', '#FF8042', '#7E69AB', '#1EAEDB'];
 
 const AIFeatures = [
@@ -105,28 +113,32 @@ const AIFeatures = [
     title: "智慧資產分析",
     description: "AI強化的資產淨值趨勢預測與風險識別",
     insight: "分析顯示您的資產在8月達到高峰，建議關注流動性分配以優化年底稅務籌劃。",
-    chartType: "bar"
+    chartType: "bar",
+    detailInfo: "AI分析顯示您的資產淨值在第三季度呈現成長趨勢，但有季節性波動。系統檢測到年底前可能需要調整流動性以應對稅務需求。"
   },
   {
     icon: <ChartBar className="h-5 w-5" />,
     title: "自動投資優化",
     description: "基於市場行為的AI驅動投資策略調整",
     insight: "根據您的風險偏好與市場波動，AI推薦增加10%的防禦性資產以平衡投資組合。",
-    chartType: "scatter"
+    chartType: "scatter",
+    detailInfo: "根據當前市場情況和您的風險容忍度(中等)，AI系統建議將投資組合從「增長型」調整為更趨「平衡型」，增加防禦性資產比例10%。"
   },
   {
     icon: <Database className="h-5 w-5" />,
     title: "智能資料整合",
     description: "多源財務數據自動解析與關聯構建",
     insight: "系統已自動整合12個金融機構的資料，並識別出3個重複計算的資產項目。",
-    chartType: "bar-progress"
+    chartType: "bar-progress",
+    detailInfo: "資料整合引擎已成功連接12個金融機構的API，處理超過1,500份報表和交易記錄。AI已建立超過320個資產關聯和86個交易模式。"
   },
   {
     icon: <Search className="h-5 w-5" />,
     title: "投資機會識別",
     description: "AI篩選高價值投資標的與市場時機",
     insight: "AI檢測到5檔符合您投資風格的高潛力標的，點擊查看詳細分析報告。",
-    chartType: "area"
+    chartType: "area",
+    detailInfo: "基於您過去交易模式和投資偏好，AI從超過5,000個投資標的中篩選出5檔高潛力標的。這些推薦結合了基本面分析、技術指標和情緒指標。"
   }
 ];
 
@@ -427,60 +439,49 @@ const Hero = () => {
       );
     } else if (chartType === "alt-assets") {
       return (
-        <div className="flex flex-col items-center">
-          <div className="w-full h-60 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg mb-6">
+        <div className="flex flex-col space-y-4">
+          <div className="w-full h-40 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg mb-2">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center">
                 <Watch className="h-5 w-5 mr-2 text-blue-500" />
-                <h3 className="font-bold text-lg dark:text-white">Tracking Alternative Assets</h3>
+                <h3 className="font-bold text-lg dark:text-white">另類資產追蹤</h3>
               </div>
-              <div className="font-bold text-2xl dark:text-white">$8,200</div>
+              <div className="font-bold text-2xl dark:text-white">$216,300</div>
             </div>
-            <div className="relative h-[140px]">
+            <div className="relative h-[100px]">
               {/* 3D-style Bar Chart */}
-              <div className="flex items-end h-full relative pt-4">
-                <div className="relative flex items-end">
-                  <div className="mx-4 w-16 bg-blue-400 dark:bg-blue-500 rounded-t-lg h-[80px] z-10 shadow-lg transform transition-all relative">
-                    <div className="absolute -top-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">1M</div>
-                    <div className="absolute -bottom-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">$7,800</div>
+              <div className="flex items-end h-full justify-center space-x-10">
+                {altAssetsData.map((asset, index) => (
+                  <div key={index} className="relative flex flex-col items-center">
+                    <div className="mx-1 w-14 bg-blue-400 dark:bg-blue-500 rounded-t-lg shadow-lg transform transition-all" 
+                         style={{height: `${asset.value / 100}px`}}>
+                      <div className="absolute -bottom-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">{asset.name}</div>
+                      <div className="absolute -top-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">${asset.value}</div>
+                    </div>
                   </div>
-                  <div className="absolute w-16 h-[20px] bg-blue-400/40 dark:bg-blue-500/40 transform skew-x-[30deg] origin-top-left left-[72px] bottom-0"></div>
-                </div>
-                
-                <div className="relative flex items-end ml-8">
-                  <div className="mx-4 w-16 bg-blue-400 dark:bg-blue-500 rounded-t-lg h-[100px] z-10 shadow-lg transform transition-all relative">
-                    <div className="absolute -top-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">2M</div>
-                    <div className="absolute -bottom-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">$7,950</div>
-                  </div>
-                  <div className="absolute w-16 h-[20px] bg-blue-400/40 dark:bg-blue-500/40 transform skew-x-[30deg] origin-top-left left-[72px] bottom-0"></div>
-                </div>
-                
-                <div className="relative flex items-end ml-8">
-                  <div className="mx-4 w-16 bg-blue-400 dark:bg-blue-500 rounded-t-lg h-[120px] z-10 shadow-lg transform transition-all relative">
-                    <div className="absolute -top-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">3M</div>
-                    <div className="absolute -bottom-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">$8,100</div>
-                  </div>
-                  <div className="absolute w-16 h-[20px] bg-blue-400/40 dark:bg-blue-500/40 transform skew-x-[30deg] origin-top-left left-[72px] bottom-0"></div>
-                </div>
-                
-                <div className="relative flex items-end ml-8">
-                  <div className="mx-4 w-16 bg-blue-400 dark:bg-blue-500 rounded-t-lg h-[140px] z-10 shadow-lg transform transition-all relative">
-                    <div className="absolute -top-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">4M</div>
-                    <div className="absolute -bottom-6 text-xs font-semibold text-gray-600 dark:text-gray-300 w-full text-center">$8,200</div>
-                  </div>
-                  <div className="absolute w-16 h-[20px] bg-blue-400/40 dark:bg-blue-500/40 transform skew-x-[30deg] origin-top-left left-[72px] bottom-0"></div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
-          <div className="flex items-center bg-white dark:bg-gray-800 rounded-xl p-4 text-left">
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4">
-              <Watch className="h-6 w-6 text-blue-500" />
-            </div>
-            <div>
-              <h4 className="font-medium dark:text-white">Watch</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-300">Track the price of your watch and other assets</p>
-            </div>
+          
+          <div className="grid grid-cols-2 gap-2">
+            {altAssetTypes.map((asset, index) => (
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-3 shadow flex items-center space-x-3">
+                <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                  {index === 0 ? <Watch className="h-4 w-4 text-blue-500" /> : 
+                   index === 1 ? <Activity className="h-4 w-4 text-purple-500" /> :
+                   index === 2 ? <ChartPie className="h-4 w-4 text-green-500" /> : 
+                   <Briefcase className="h-4 w-4 text-orange-500" />}
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium dark:text-white">{asset.name}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500 dark:text-gray-400">${asset.value.toLocaleString()}</span>
+                    <span className="text-xs text-green-500">{asset.change}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       );
@@ -592,6 +593,11 @@ const Hero = () => {
                             返回
                           </button>
                         </div>
+                        <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg text-left mb-4">
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            {AIFeatures[activeFeature].detailInfo}
+                          </p>
+                        </div>
                         {renderChart(
                           activeFeature === 0 ? "bar" : 
                           activeFeature === 1 ? "scatter" : 
@@ -613,6 +619,11 @@ const Hero = () => {
                           >
                             返回
                           </button>
+                        </div>
+                        <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg text-left mb-4">
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            追蹤您的高價值收藏品、古董、藝術品和其他非傳統投資的估值和表現。AI定期從市場數據更新估值。
+                          </p>
                         </div>
                         {renderChart("alt-assets")}
                       </div>
@@ -659,17 +670,15 @@ const Hero = () => {
                     {!showDetailedView && !showAlternativeAssets && (
                       <div className="flex items-center justify-between mt-4">
                         <Button
-                          variant="outline"
                           size="sm"
-                          className="text-xs"
+                          className="text-sm bg-white dark:bg-gray-700 text-quantaryx-purple dark:text-white border border-quantaryx-purple/50 dark:border-purple-500/50 hover:bg-quantaryx-purple/10 dark:hover:bg-purple-800/30 shadow-sm"
                           onClick={toggleDetailedView}
                         >
                           查看詳細分析
                         </Button>
                         <Button
-                          variant="outline"
                           size="sm"
-                          className="text-xs"
+                          className="text-sm bg-white dark:bg-gray-700 text-quantaryx-purple dark:text-white border border-quantaryx-purple/50 dark:border-purple-500/50 hover:bg-quantaryx-purple/10 dark:hover:bg-purple-800/30 shadow-sm"
                           onClick={toggleAlternativeAssets}
                         >
                           查看另類資產
@@ -730,7 +739,7 @@ const Hero = () => {
                         <Button 
                           variant="ghost" 
                           size="sm" 
-                          className="text-quantaryx-purple mt-2 px-0"
+                          className="text-quantaryx-purple dark:text-purple-400 dark:hover:text-purple-300 mt-2 px-0"
                           onClick={() => handleAdvancedFeatureClick(feature)}
                         >
                           了解更多 <ArrowRight className="ml-1 h-4 w-4" />
@@ -742,8 +751,8 @@ const Hero = () => {
               ))}
             </CarouselContent>
             <div className="flex justify-center gap-2 mt-4">
-              <CarouselPrevious className="relative static left-0 translate-y-0 mr-2" />
-              <CarouselNext className="relative static right-0 translate-y-0 ml-2" />
+              <CarouselPrevious className="relative static left-0 translate-y-0 mr-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+              <CarouselNext className="relative static right-0 translate-y-0 ml-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
             </div>
           </Carousel>
           
