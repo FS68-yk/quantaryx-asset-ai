@@ -287,7 +287,10 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
 
   // Function to translate keys
   const t = (key: string): string => {
-    return translations[language][key] || key;
+    // Check if the key exists in the translation object
+    const translation = translations[language]?.[key];
+    // Return the translation if it exists, otherwise return the key
+    return typeof translation === 'string' ? translation : key;
   };
 
   // Save language preference when it changes
